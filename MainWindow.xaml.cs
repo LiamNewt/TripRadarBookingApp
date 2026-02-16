@@ -30,7 +30,7 @@ namespace TripRadar
         {
 
             var client = new HttpClient();
-            var request = new HttpRequestMessage
+            var request = new HttpRequestMessage 
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri("https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights?stops=none&pageNo=1&adults=1&children=0%2C17&sort=BEST&cabinClass=ECONOMY&currency_code=AED"),
