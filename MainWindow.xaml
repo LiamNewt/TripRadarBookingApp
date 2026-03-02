@@ -6,7 +6,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TripRadar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="1100"
+        SizeToContent="Manual"
+        ResizeMode="NoResize">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#726EFF"/>
@@ -17,8 +19,80 @@
             <GradientStop Color="#FF212B38" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
-    <TabControl TabStripPlacement="Bottom" Background="#FF37465B" BorderBrush="White"  Margin="10,10,10,9" Foreground="White" SelectionChanged="TabControl_SelectionChanged" BorderThickness="0,0,0,0">
-        <TabItem Name="Flights" Margin="-17,0,-92,-2" >
+    <TabControl TabStripPlacement="Bottom" Background="#FF37465B" Foreground="White" SelectionChanged="TabControl_SelectionChanged" >
+        <TabItem Margin="741,-435,-737,433">
+            <TabItem.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
+                </LinearGradientBrush>
+            </TabItem.Background>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" Height="60" Width="68">
+                    <materialDesign:PackIcon Kind="Account"
+                Width="56"
+                Height="50"
+                VerticalAlignment="Center"
+                Margin="5,0,10,0"
+                Foreground="#FF212B38"/>
+
+                </StackPanel>
+            </TabItem.Header>
+            <Grid Margin="0">
+                <Image x:Name="Logo3" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
+                    <Image.Effect>
+                        <DropShadowEffect/>
+                    </Image.Effect>
+                </Image>
+                <Label x:Name="Name3" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" Grid.Row="1"/>
+            </Grid>
+
+
+        </TabItem>
+        <TabItem Margin="742,-435,-785,433" >
+            <TabItem.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
+                </LinearGradientBrush>
+            </TabItem.Background>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" Height="60">
+                    <materialDesign:PackIcon Kind="BagPersonal"
+                Width="56"
+                Height="50"
+                VerticalAlignment="Center"
+                Margin="0,0,10,0"
+                Foreground="#FF212B38"/>
+                    <TextBlock Text="My Trips"
+                VerticalAlignment="Center"
+                FontSize="30"
+                FontFamily="Calibri"
+                Foreground="#FF212B38" FontWeight="Bold"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="759*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+
+            </Grid>
+
+
+
+        </TabItem>
+        <TabItem Name="Flights" Margin="0,0,-92,-2" >
             <TabItem.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -51,8 +125,17 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <Rectangle Fill="Blue" Margin="10,90,10,10" Grid.Row="1"/>
-                <Button Content="Search Flights" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="Button_Click"/>
+                <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" Grid.Row="1"/>
+                <Label x:Name="SearchFlightsText" Content="Search for a flight" HorizontalAlignment="Left" Height="40" Margin="38,92,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <Button Content="Search Flights" HorizontalAlignment="Left" Margin="238,132,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="Button_Click_1"/>
+                <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="23,132,0,0" VerticalAlignment="Top" Width="200" Height="30" Text=""/>
+                <ListBox x:Name="FlightsListBox" Height="152" Width="284"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,175,0,0">
+
+                </ListBox>
             </Grid>
 
 
@@ -80,17 +163,14 @@
                         Foreground="#FF212B38" FontWeight="Bold"/>
                 </StackPanel>
             </TabItem.Header>
-            <Grid Margin="21,-314,22,23">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Image x:Name="Logo1" HorizontalAlignment="Left" Height="84" Margin="-15,319,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
+            <Grid Margin="0">
+
+                <Image x:Name="Logo1" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
                     <Image.Effect>
                         <DropShadowEffect/>
                     </Image.Effect>
                 </Image>
-                <Label x:Name="Name1" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="69,325,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7">
+                <Label x:Name="Name1" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7">
                     <Label.Effect>
                         <DropShadowEffect/>
                     </Label.Effect>
@@ -121,22 +201,14 @@
                         Foreground="#FF212B38" FontWeight="Bold"/>
                 </StackPanel>
             </TabItem.Header>
-            <Grid Margin="21,-314,22,23">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="26*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition Height="313*"/>
-                    <RowDefinition Height="318*"/>
-                    <RowDefinition Height="5*"/>
-                </Grid.RowDefinitions>
-                <Image x:Name="Logo" HorizontalAlignment="Left" Height="84" Margin="-15,6,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
+            <Grid Margin="0">
+
+                <Image x:Name="Logo" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
                     <Image.Effect>
                         <DropShadowEffect/>
                     </Image.Effect>
                 </Image>
-                <Label x:Name="Name" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="69,12,0,0" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7" Grid.ColumnSpan="2" Grid.Row="2">
+                <Label x:Name="Name" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7" Grid.ColumnSpan="2" Grid.Row="2">
                     <Label.Effect>
                         <DropShadowEffect/>
                     </Label.Effect>
@@ -146,75 +218,6 @@
 
             </Grid>
         </TabItem>
-        <TabItem Margin="-29,-319,33,317" >
-            <TabItem.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
-                </LinearGradientBrush>
-            </TabItem.Background>
-            <TabItem.Header>
-                <StackPanel Orientation="Horizontal" Height="60" Width="68">
-                    <materialDesign:PackIcon Kind="Account"
-                        Width="56"
-                        Height="50"
-                        VerticalAlignment="Center"
-                        Margin="5,0,10,0"
-                        Foreground="#FF212B38"/>
 
-                </StackPanel>
-            </TabItem.Header>
-            <Grid Margin="21,-314,22,23">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="759*"/>
-                    <ColumnDefinition Width="35*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-
-
-        </TabItem>
-        <TabItem Margin="-29,-319,-14,317" >
-            <TabItem.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
-                </LinearGradientBrush>
-            </TabItem.Background>
-            <TabItem.Header>
-                <StackPanel Orientation="Horizontal" Height="60">
-                    <materialDesign:PackIcon Kind="BagPersonal"
-                        Width="56"
-                        Height="50"
-                        VerticalAlignment="Center"
-                        Margin="0,0,10,0"
-                        Foreground="#FF212B38"/>
-                    <TextBlock Text="My Trips"
-                        VerticalAlignment="Center"
-                        FontSize="30"
-                        FontFamily="Calibri"
-                        Foreground="#FF212B38" FontWeight="Bold"/>
-                </StackPanel>
-            </TabItem.Header>
-            <Grid Margin="21,-314,22,23">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="759*"/>
-                    <ColumnDefinition Width="35*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition/>
-                    
-                </Grid.RowDefinitions>
-                
-            </Grid>
-            
-
-
-        </TabItem>
     </TabControl>
 </Window>
-    
