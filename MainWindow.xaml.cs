@@ -79,7 +79,8 @@ namespace TripRadar
                     toAirport.ID,
                     departureDate.Value);
 
-                FlightResults.Navigate(new FlightsResultsPage(flights));
+                var resultsFlight = new FlightResultsWindow(flights);
+                resultsFlight.Show();
             }
             catch (Exception ex)
             {

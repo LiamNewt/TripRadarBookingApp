@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TripRadar
 {
     /// <summary>
-    /// Interaction logic for FlightsResultsPage.xaml
+    /// Interaction logic for FlightResultsWindow.xaml
     /// </summary>
-    public partial class FlightsResultsPage : Page
+    public partial class FlightResultsWindow : Window
     {
-        public FlightsResultsPage(List<Flight>flights)
+        public FlightResultsWindow(List<Flight>flights)
         {
             InitializeComponent();
             FlightsItemControl.ItemsSource = flights;

@@ -117,23 +117,9 @@
                 </Label>
                 <ListBox x:Name="FlightsListBoxArrivalDate" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="461,343,0,0" Background="White"/>
                 <DatePicker x:Name="ArrivalDatePicker" HorizontalAlignment="Left" Margin="461,344,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
-                <Button Name ="CheckFlights" Content="Check Flights" Width="200" Height="40" Margin="350,420,0,0" Click="CheckFlights_Click"/>
+                <Button Name ="CheckFlights" Content="Search Flights" Width="150" Height="40" Margin="700,380,0,0" Click="CheckFlights_Click"/>
                 <Frame Name="FlightResults" NavigationUIVisibility="Hidden" Margin="0,90,0,0" Height="350" VerticalAlignment="Bottom">
-                <!--<ListBox Name= "FlightsResultsListBox" Width="400" Height="200" Margin="654,226,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
-                   <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="5">
-                                <TextBlock Text="{Binding DepartureAirport}"/>
-                                <TextBlock Text="{Binding ArrivalAirport}"/>
-                                <TextBlock Text="{Binding DepartureTime}"/>
-                                <TextBlock Text="{Binding ArrivalTime}"/>
-                                <TextBlock Text="{Binding Price, StringFormat='€{0}'}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                   </ListBox.ItemTemplate>
-                </ListBox>-->
                 </Frame>
-
             </Grid>
         </TabItem>
         <!--End of Flights TabItem-->
