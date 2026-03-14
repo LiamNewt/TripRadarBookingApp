@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using static TripRadar.SearchFlights;
 
+
 namespace TripRadar
 {
     public class TripRadarApp
@@ -18,15 +19,16 @@ namespace TripRadar
         private static readonly HttpClient client = new HttpClient();
 
         
-        public async Task<Flightsearch> SearchFlights(string searchQuery)
+        public async Task<Root> SearchFlights(string fromId, string toId)
         {
-            var safe = Uri.EscapeDataString(searchQuery ?? "");
+            var query = $"fromId = {Uri.EscapeDataString(fromId)}" +
+                        $"toId= {Uri.EscapeDataString(toId)}";
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                MessageBox.Show("API key not found. Set the environment variable 'BookingComKey' or provide a valid key.", "Missing API Key", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("API key not found.", "Missing API Key", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return null;
             }
-            if (string.IsNullOrWhiteSpace(safe))
+            if (string.IsNullOrWhiteSpace(query))
             {
                 MessageBox.Show("Search query cannot be empty.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return null;
@@ -35,7 +37,7 @@ namespace TripRadar
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/flights/searchDestination?query={safe}"),
+                RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights?{query}"),
             };
             request.Headers.Add("x-rapidapi-key", apiKey);
             request.Headers.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com");
@@ -51,8 +53,8 @@ namespace TripRadar
                         MessageBox.Show($"Request failed: {(int)response.StatusCode} {response.ReasonPhrase}\n\n{body}", "API Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return null;
                     }
-                    
-                    Flightsearch result = JsonConvert.DeserializeObject<Flightsearch>(body); // APi returns a JSON object that matches the Root class structure
+
+                    Root result = JsonConvert.DeserializeObject<Root>(body); // APi returns a JSON object that matches the Root class structure
                     return result;
                     
                 }

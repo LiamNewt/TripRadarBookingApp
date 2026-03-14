@@ -11,7 +11,7 @@
         ResizeMode="NoResize">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#726EFF"/>
+            <GradientStop Color="#FF3B2F70"/>
             <GradientStop Color="#212B38" Offset="1"/>
             <GradientStop Color="#FF08C6AB" Offset="0.502"/>
             <GradientStop Color="#FF5AFFE7" Offset="0.237"/>
@@ -19,80 +19,10 @@
             <GradientStop Color="#FF212B38" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
-    <TabControl TabStripPlacement="Bottom" Background="#FF37465B" Foreground="White" SelectionChanged="TabControl_SelectionChanged" >
-        <TabItem Margin="741,-435,-737,433">
-            <TabItem.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
-                </LinearGradientBrush>
-            </TabItem.Background>
-            <TabItem.Header>
-                <StackPanel Orientation="Horizontal" Height="60" Width="68">
-                    <materialDesign:PackIcon Kind="Account"
-                Width="56"
-                Height="50"
-                VerticalAlignment="Center"
-                Margin="5,0,10,0"
-                Foreground="#FF212B38"/>
 
-                </StackPanel>
-            </TabItem.Header>
-            <Grid Margin="0">
-                <Image x:Name="Logo3" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
-                    <Image.Effect>
-                        <DropShadowEffect/>
-                    </Image.Effect>
-                </Image>
-                <Label x:Name="Name3" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7">
-                    <Label.Effect>
-                        <DropShadowEffect/>
-                    </Label.Effect>
-                </Label>
-                <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" Grid.Row="1"/>
-            </Grid>
+    <TabControl TabStripPlacement="Bottom" SelectionChanged="TabControl_SelectionChanged">
+        <TabItem Name="Flights" >
 
-
-        </TabItem>
-        <TabItem Margin="742,-435,-785,433" >
-            <TabItem.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
-                </LinearGradientBrush>
-            </TabItem.Background>
-            <TabItem.Header>
-                <StackPanel Orientation="Horizontal" Height="60">
-                    <materialDesign:PackIcon Kind="BagPersonal"
-                Width="56"
-                Height="50"
-                VerticalAlignment="Center"
-                Margin="0,0,10,0"
-                Foreground="#FF212B38"/>
-                    <TextBlock Text="My Trips"
-                VerticalAlignment="Center"
-                FontSize="30"
-                FontFamily="Calibri"
-                Foreground="#FF212B38" FontWeight="Bold"/>
-                </StackPanel>
-            </TabItem.Header>
-            <Grid Margin="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="759*"/>
-                    <ColumnDefinition Width="35*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition/>
-
-                </Grid.RowDefinitions>
-
-            </Grid>
-
-
-
-        </TabItem>
-        <TabItem Name="Flights" Margin="0,0,-92,-2" >
             <TabItem.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -102,19 +32,20 @@
             <TabItem.Header>
                 <StackPanel Orientation="Horizontal" Height="60">
                     <materialDesign:PackIcon Kind="Plane"
-                        Width="56"
-                        Height="50"
-                        VerticalAlignment="Center"
-                        Margin="0,0,10,0"
-                        Foreground="#FF212B38"/>
+                        Width="40"
+                        Height="28"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Foreground="#FF5AFFE7"/>
                     <TextBlock Text="Flights"
-                        VerticalAlignment="Center"
-                        FontSize="30"
+                        VerticalAlignment="Top"
+                        FontSize="21"
                         FontFamily="Calibri"
-                        Foreground="#FF212B38" FontWeight="Bold"/>
+                        Foreground="White" FontWeight="Bold"/>
                 </StackPanel>
             </TabItem.Header>
             <Grid Margin="0">
+                <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" Grid.Row="1"/>
                 <Image x:Name="Logo2" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
                     <Image.Effect>
                         <DropShadowEffect/>
@@ -125,23 +56,89 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" Grid.Row="1"/>
-                <Label x:Name="SearchFlightsText" Content="Search for a flight" HorizontalAlignment="Left" Height="40" Margin="38,92,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                <TextBlock Name="TabDescFlights" Text="Find the best flights for your next adventure." HorizontalAlignment="Left" Height="40" Margin="314,94,0,0" VerticalAlignment="Top" Width="440" FontSize="20" Foreground="White" FontWeight="Bold" FontStyle="Italic">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Label x:Name="Departure" Content="Where are you flying from?" HorizontalAlignment="Left" Height="40" Margin="65,149,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
                     <Label.Effect>
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <Button Content="Search Flights" HorizontalAlignment="Left" Margin="238,132,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="Button_Click_1"/>
-                <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="23,132,0,0" VerticalAlignment="Top" Width="200" Height="30" Text=""/>
-                <ListBox x:Name="FlightsListBox" Height="152" Width="284"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="23,175,0,0">
+                <TextBlock x:Name="Departures" Text="Departures" HorizontalAlignment="Left" Height="40" Margin="139,128,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold" FontSize="18" Foreground="White" TextDecorations="Underline"/>
 
+                <materialDesign:PackIcon Kind="AirplaneTakeoff" Margin="13,167,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Button Name="SearchAirportsDeparture" Content="Search Airports" HorizontalAlignment="Left" Margin="226,184,0,0" VerticalAlignment="Top" Width="140" Height="30" Click="SearchAirportsDepart"/>
+                <TextBox x:Name="SearchTextBoxDepart" HorizontalAlignment="Left" Margin="69,185,0,0" VerticalAlignment="Top" Width="150" Height="30" Text="" Background="White"/>
+                <ListBox x:Name="FlightsListBoxDepart" Height="80" Width="284"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="69,214,0,0" Foreground="#FF5AFFE7" DisplayMemberPath="Name" SelectionChanged="FlightsListBoxDepart_SelectionChanged">
                 </ListBox>
+                <Label x:Name="Arrival" Content="Where are you flying to?" HorizontalAlignment="Left" Height="40" Margin="457,149,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+
+                <TextBlock x:Name="Arrivals" Text="Arrivals" HorizontalAlignment="Left" Height="40" Margin="543,128,0,0" VerticalAlignment="Top" Width="70" FontWeight="Bold" FontSize="18" Foreground="White" TextDecorations="Underline"/>
+                <materialDesign:PackIcon Kind="AirplaneLanding" Margin="399,168,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Button Name="SearchAirportsArrival" Content="Search Airports" HorizontalAlignment="Left" Margin="616,182,0,0" VerticalAlignment="Top" Width="140" Height="30" Click="SearchAirportsArrive"/>
+                <TextBox x:Name="SearchTextBoxArrival" HorizontalAlignment="Left" Margin="459,182,0,0" VerticalAlignment="Top" Width="150" Height="30" Text="" Background="White"/>
+                <ListBox x:Name="FlightsListBoxArrival" Height="80" Width="284"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="462,212,0,0" Foreground="#FF5AFFE7" DisplayMemberPath="Name" SelectionChanged="FlightsListBoxArrival_SelectionChanged">
+                </ListBox>
+                <materialDesign:PackIcon Kind="Calendar" Margin="15,330,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="DepartureDate" Content="Departure Date" HorizontalAlignment="Left" Height="40" Margin="65,310,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox x:Name="FlightsListBoxDepartureDate" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="69,343,0,0" Background="White"/>
+                <DatePicker x:Name="DepartureDatePicker" HorizontalAlignment="Left" Margin="69,344,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
+                <materialDesign:PackIcon Kind="Calendar" Margin="403,330,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="ReturnDate" Content="Return Date" HorizontalAlignment="Left" Height="40" Margin="457,310,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox x:Name="FlightsListBoxArrivalDate" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="461,343,0,0" Background="White"/>
+                <DatePicker x:Name="ArrivalDatePicker" HorizontalAlignment="Left" Margin="461,344,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
+                <Button Name ="CheckFlights" Content="Check Flights" Width="200" Height="40" Margin="350,420,0,0" Click="CheckFlights_Click"/>
+                <Frame Name="FlightResults" NavigationUIVisibility="Hidden" Margin="0,90,0,0" Height="350" VerticalAlignment="Bottom">
+                <!--<ListBox Name= "FlightsResultsListBox" Width="400" Height="200" Margin="654,226,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+                   <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding DepartureAirport}"/>
+                                <TextBlock Text="{Binding ArrivalAirport}"/>
+                                <TextBlock Text="{Binding DepartureTime}"/>
+                                <TextBlock Text="{Binding ArrivalTime}"/>
+                                <TextBlock Text="{Binding Price, StringFormat='€{0}'}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                   </ListBox.ItemTemplate>
+                </ListBox>-->
+                </Frame>
+
             </Grid>
-
-
-
         </TabItem>
-        <TabItem Name="Hotels" Margin="92,0,-201,-2" BorderThickness="20,20,200,20">
+        <!--End of Flights TabItem-->
+
+        <TabItem Name="Hotels"  BorderThickness="20,20,200,20">
             <TabItem.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF5AFFE7" Offset="1"/>
@@ -149,18 +146,16 @@
                 </LinearGradientBrush>
             </TabItem.Background>
             <TabItem.Header>
-                <StackPanel Orientation="Horizontal" Height="60">
+                <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Hotel"
-                        Width="56"
-                        Height="50"
-                        VerticalAlignment="Center"
-                        Margin="0,0,10,0"
-                        Foreground="#FF212B38"/>
+                        Width="40"
+                        Height="30"
+                        Foreground="#FF5AFFE7"/>
                     <TextBlock Text="Hotels"
-                        VerticalAlignment="Center"
-                        FontSize="30"
+                        VerticalAlignment="Top"
+                        FontSize="21"
                         FontFamily="Calibri"
-                        Foreground="#FF212B38" FontWeight="Bold"/>
+                        Foreground="White" FontWeight="Bold"/>
                 </StackPanel>
             </TabItem.Header>
             <Grid Margin="0">
@@ -179,7 +174,8 @@
 
             </Grid>
         </TabItem>
-        <TabItem Name="CarHire" Margin="201,0,-310,-2" BorderThickness="20,20,200,20">
+
+        <TabItem Name="CarHire" BorderThickness="20,20,200,20">
             <TabItem.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="White"/>
@@ -189,20 +185,18 @@
             <TabItem.Header>
                 <StackPanel Orientation="Horizontal" Height="60">
                     <materialDesign:PackIcon Kind="Car"
-                        Width="56"
-                        Height="50"
-                        VerticalAlignment="Center"
-                        Margin="-20,0,10,0"
-                        Foreground="#FF212B38"/>
+                        Width="40"
+                        Height="28"
+                        VerticalAlignment="Top"
+                        Foreground="#FF5AFFE7"/>
                     <TextBlock Text="Car Hire"
-                        VerticalAlignment="Center"
-                        FontSize="30"
+                        VerticalAlignment="Top"
+                        FontSize="21"
                         FontFamily="Calibri"
-                        Foreground="#FF212B38" FontWeight="Bold"/>
+                        Foreground="White" FontWeight="Bold"/>
                 </StackPanel>
             </TabItem.Header>
             <Grid Margin="0">
-
                 <Image x:Name="Logo" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
                     <Image.Effect>
                         <DropShadowEffect/>
@@ -214,10 +208,43 @@
                     </Label.Effect>
                 </Label>
 
-
-
             </Grid>
         </TabItem>
+        <TabItem Name="Account">
+            <TabItem.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF5AFFE7" Offset="1"/>
+                </LinearGradientBrush>
+            </TabItem.Background>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" Height="60">
+                    <materialDesign:PackIcon Kind="Account"
+            Width="40"
+            Height="28"
+            VerticalAlignment="Top"
+            Foreground="#FF5AFFE7"/>
+                    <TextBlock Text="My Account"
+            VerticalAlignment="Top"
+            FontSize="21"
+            FontFamily="Calibri"
+            Foreground="White" FontWeight="Bold"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid Margin="0">
+                <Image x:Name="Logo4" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
+                    <Image.Effect>
+                        <DropShadowEffect/>
+                    </Image.Effect>
+                </Image>
+                <Label x:Name="Name4" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7" Grid.ColumnSpan="2" Grid.Row="2">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+            </Grid>
 
+
+        </TabItem>
     </TabControl>
 </Window>
