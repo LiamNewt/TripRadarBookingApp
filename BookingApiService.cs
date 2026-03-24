@@ -35,34 +35,41 @@ namespace TripRadar
                 dynamic result = JsonConvert.DeserializeObject(body);
 
                 var airports = new List<Airport>();
-                foreach (var a in result.data)
+                foreach (var airport in result.data)
                 {
                     airports.Add(new Airport
                     {
-                        ID = a.id,
-                        Name = a.name,
-                        Code = a.code
+                        ID = airport.id,
+                        Name = airport.name,
+                        Code = airport.code
                     });
                 }
                 return airports;
             }
         }
 
-        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate)
+        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, DateTime? returnDate=null)
         {
             var date = departureDate.ToString("yyyy-MM-dd");
+            var rDate = returnDate;
 
             var url =
                 $"https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights" +
                 $"?fromId={Uri.EscapeDataString(fromAirportId)}" +
                 $"&toId={Uri.EscapeDataString(toAirportId)}" +
                 $"&departDate={date}" +
+                $"&returnDate={rDate}" +
                 $"&stops=none" +
                 $"&pageNo=1" +
                 $"&adults=1" +
                 $"&sort=BEST" +
                 $"&cabinClass=ECONOMY" +
                 $"&currency_code=EUR";
+
+            if (returnDate.HasValue)
+            {
+                url += $"&returnDate={returnDate.Value.ToString("yyyy-MM-dd")}";
+            }
 
             var request = new HttpRequestMessage
             {
@@ -93,7 +100,7 @@ namespace TripRadar
                     DepartureTime = f.segments.First().departureTime,
                     ArrivalTime = f.segments.First().arrivalTime,
                     Price = f.priceBreakdown.total.units,
-                    AirlineCode = f.segments.First().legs.First().carriersData.First().code
+                    AirlineCode = f.segments.First().legs.First().carriersData.First().code,
                 }).ToList();
 
                 return flights;

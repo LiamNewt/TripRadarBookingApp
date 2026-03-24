@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripRadar"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="FlightResultsWindow" Height="450" Width="600" Foreground="#FF2C3848" Background="#FF2C3848">
+
     <Grid>
         <ScrollViewer>
             <ItemsControl Name="FlightsItemControl" Foreground="#FF2C3848" Width="450" Background="#FF2C3848" Margin="10,0,0,0">
@@ -13,20 +15,20 @@
                     <DataTemplate>
                         <Border Background="#FF445F7E" CornerRadius="10" Margin="10,5" Padding="15">
                             <StackPanel>
-                                <Image Source="{Binding AirlineLogo}" Width="80" Height="80" Margin="0,0,15,0"/>
+                                <Image Source="{Binding AirlineLogo}" Width="160" Height="160" Margin="0,0,0,0"/>
                                 <StackPanel Margin="5">
-                                    <TextBlock Text="{Binding DepartureAirport, StringFormat='Departure: {0}'}" Foreground="White" FontSize="20" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding ArrivalAirport, StringFormat='Arrival: {0}'}" Foreground="White" FontSize="20" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DepartureTime, StringFormat='Departure Date: {0}'}" Foreground="#FF5AFFE7"/>
-                                    <TextBlock Text="{Binding ArrivalTime, StringFormat='Return Date: {0}'}" Foreground="#FF5AFFE7"/>
+                                    <TextBlock Text="{Binding DepartureAirport, StringFormat='Departure: {0}'}" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding ArrivalAirport, StringFormat='Arrival: {0}'}" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DepartureTime, StringFormat='Departure Date/Time: {0}'}" Foreground="#FF5AFFE7" FontSize="16"/>
+                                    <TextBlock Text="{Binding ArrivalTime, StringFormat='Arrival Date/Time: {0}'}" Foreground="#FF5AFFE7" FontSize="16"/>
                                     <TextBlock Text="{Binding Price, StringFormat='€{0}'}" Foreground="#FF5AFFE7" FontSize="24" FontWeight="Bold"/>
+                                    <Button Name="AddFlight" Content="Select Flight" Width="120" Margin="0,0,15,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
         </ScrollViewer>
     </Grid>
 </Window>

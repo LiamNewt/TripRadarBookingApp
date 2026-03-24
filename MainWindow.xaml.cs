@@ -72,6 +72,17 @@ namespace TripRadar
                     return;
                 }
 
+                DateTime? returnDate = null;
+                if (Return.IsChecked == true)
+                {
+                    returnDate = ArrivalDatePicker.SelectedDate;
+                    if (returnDate == null)
+                    {
+                        MessageBox.Show("Please enter a return date");
+                        return;
+                    }
+                }
+               
                 var service = new BookingApiService();
 
                 var flights = await service.SearchFlights(
@@ -107,6 +118,35 @@ namespace TripRadar
                 SearchTextBoxArrival.Text = selected.Name;
                 FlightsListBoxArrival.Visibility = Visibility.Collapsed; // hide list after selection
             }
+
+        }
+
+        private async void SearchHotelDest_Click(object sender, RoutedEventArgs e)
+        {
+            var service = new HotelApiService();
+            var hotels = await service.HotelSearch(SearchTextBoxHotel.Text);
+            HotelListBoxSearch.ItemsSource = hotels;
+
+        }
+
+        private void HotelListBoxSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = (Hotel)HotelListBoxSearch.SelectedItem;
+            if (selected != null)
+            {
+                SearchTextBoxHotel.Text = selected.HotelName;
+                HotelListBoxSearch.Visibility = Visibility.Collapsed;
+            }
+
+        }
+
+        private void HotelListBoxDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SearchHotelAv_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

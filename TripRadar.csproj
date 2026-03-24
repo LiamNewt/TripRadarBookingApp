@@ -75,7 +75,9 @@
     <Compile Include="FlightResultsWindow.xaml.cs">
       <DependentUpon>FlightResultsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Flightsearch.cs" />
+    <Compile Include="Hotel.cs" />
+    <Compile Include="HotelApiService.cs" />
+    <Compile Include="HotelSearch.cs" />
     <Compile Include="SearchFlights.cs" />
     <Compile Include="TripRadarApp.cs" />
     <Page Include="FlightResultsWindow.xaml">
