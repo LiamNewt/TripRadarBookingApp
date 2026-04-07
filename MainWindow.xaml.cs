@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace TripRadar
 {
     public partial class MainWindow : Window
     {
-
+        private Hotel _selectedArea;
+        private LocationResult _selectedCarHireArea;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,20 +38,6 @@ namespace TripRadar
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AccountBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MyTripsBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private async void CheckFlights_Click(object sender, RoutedEventArgs e)
         {
@@ -124,7 +112,7 @@ namespace TripRadar
         private async void SearchHotelDest_Click(object sender, RoutedEventArgs e)
         {
             var service = new HotelApiService();
-            var hotels = await service.HotelSearch(SearchTextBoxHotel.Text);
+            var hotels = await service.HotelAreaSearch(SearchTextBoxHotel.Text);
             HotelListBoxSearch.ItemsSource = hotels;
 
         }
@@ -134,20 +122,89 @@ namespace TripRadar
             var selected = (Hotel)HotelListBoxSearch.SelectedItem;
             if (selected != null)
             {
+                _selectedArea = selected;
                 SearchTextBoxHotel.Text = selected.HotelName;
                 HotelListBoxSearch.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
+        private async void SearchHotelAv_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //var hotelDest = (Hotel)HotelListBoxSearch.SelectedItem;
+                var checkInDate = FromDatePicker.SelectedDate;
+                var checkOutDate = ToDatePicker.SelectedDate;
+                //var adultNum=(Hotel)Adults.SelectedItem;
+                //var childNum=(Hotel)Children.SelectedItem;
+
+                var service = new HotelApiService();
+
+                var hotelsList = await service.HotelsAvailable(
+                    _selectedArea.DestID,
+                    checkInDate.Value,
+                    checkOutDate.Value
+                    );
+
+                var resultsHotels = new HotelsAvailList(hotelsList);
+                resultsHotels.Left = this.Left + 580;
+                resultsHotels.Top = this.Top + 170;
+                resultsHotels.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+
+            }
+        }
+
+
+        private async void SearchCarHirePickUp_Click(object sender, RoutedEventArgs e)
+        {
+            var service = new CarHireAPIService();
+            var cars = await service.CarHireAreaSearch(SearchTextBoxCarHire.Text);
+            CarHireListBoxSearch.ItemsSource = cars;
+        }
+
+        private void CarHireListBoxSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = (LocationResult)CarHireListBoxSearch.SelectedItem;
+            if (selected != null)
+            {
+                _selectedCarHireArea = selected;
+                SearchTextBoxCarHire.Text = selected.Name;
+                CarHireListBoxSearch.Visibility = Visibility.Collapsed;
             }
 
         }
 
-        private void HotelListBoxDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void SearchCarHireAv_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var selected = (LocationResult)CarHireListBoxSearch.SelectedItem;
+                var service = new CarHireAPIService();
 
-        }
+                var availableList = await service.CarsAvailable(
+                    selected.Latitude,
+                    selected.Longitude,
+                    PickUpDatePicker.SelectedDate.Value,
+                    PickUpTimePicker.SelectedTime.Value,
+                    DropOffDatePicker.SelectedDate.Value,
+                    DropOffTimePicker.SelectedTime.Value
+                    );
 
-        private void SearchHotelAv_Click(object sender, RoutedEventArgs e)
-        {
+                var resultsCars = new CarsAvailList(availableList);
+                resultsCars.Left = this.Left + 580;
+                resultsCars.Top = this.Top + 170;
+                resultsCars.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
 
+            }
         }
     }
 }

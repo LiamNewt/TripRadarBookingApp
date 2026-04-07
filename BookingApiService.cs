@@ -61,7 +61,7 @@ namespace TripRadar
                 $"&returnDate={rDate}" +
                 $"&stops=none" +
                 $"&pageNo=1" +
-                $"&adults=1" +
+                $"&adults=1" + 
                 $"&sort=BEST" +
                 $"&cabinClass=ECONOMY" +
                 $"&currency_code=EUR";

@@ -14,9 +14,27 @@ namespace TripRadar
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            var splashScreen = new Startup();
+            splashScreen.Show();
+
+            System.Threading.Thread.Sleep(2000);
+
+            var MainWindow = new MainWindow();
+            MainWindow.Show();
+
+            splashScreen.Close();
+        }
     }
     internal class Program
     {
 
     }
+
+    
+
 }
+
+

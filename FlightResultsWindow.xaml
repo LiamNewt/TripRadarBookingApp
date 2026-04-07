@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TripRadar"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="FlightResultsWindow" Height="450" Width="600" Foreground="#FF2C3848" Background="#FF2C3848">
+        Title="Available Flights" Height="450" Width="600" Foreground="#FF2C3848" Background="#FF2C3848">
 
     <Grid>
         <ScrollViewer>

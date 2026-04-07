@@ -6,9 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TripRadar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="1100"
-        SizeToContent="Manual"
+        Title="Trip Radar" Height="550" Width="1100"
+        SizeToContent="Manual" WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF3B2F70"/>
@@ -46,8 +47,8 @@
             </TabItem.Header>
             <Grid Margin="0">
                 <Grid Margin="0">
-                <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
-                <Image Name="FlightBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="C:\Users\liamn\OneDrive - Atlantic TU\Year 2\ObjectOrientedDev\Project\images\ChatGPT Image Mar 24, 2026, 02_40_39 PM.png"/>
+                    <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
+                    <Image Name="FlightBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="C:\Users\liamn\OneDrive - Atlantic TU\Year 2\ObjectOrientedDev\Project\images\ChatGPT Image Mar 24, 2026, 02_40_39 PM.png"/>
                 </Grid>
                 <Image x:Name="Logo2" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
                     <Image.Effect>
@@ -59,10 +60,7 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <TextBlock Name="TabDescFlights" Text="Find the best flights for your next adventure." HorizontalAlignment="Left" Height="40" Margin="314,94,0,0" VerticalAlignment="Top" Width="440" FontSize="20" Foreground="White" FontWeight="Bold" FontStyle="Italic">
-                    <TextBlock.Effect>
-                        <DropShadowEffect/>
-                    </TextBlock.Effect>
+                <TextBlock Name="TabDescFlights" Text="Find the best flights for your next adventure." HorizontalAlignment="Left" Height="40" Margin="359,94,0,0" VerticalAlignment="Top" Width="400" FontSize="20" Foreground="White" FontWeight="Bold" FontFamily="Calibri" >
                 </TextBlock>
                 <Label x:Name="Departure" Content="Where are you flying from?" HorizontalAlignment="Left" Height="40" Margin="65,149,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
                     <Label.Effect>
@@ -168,10 +166,7 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <TextBlock Name="TabDescHotels" Text="Book the perfect hotel for your stay." HorizontalAlignment="Center" Height="40" Margin="0,93,0,0" VerticalAlignment="Top" Width="350" FontSize="20" Foreground="White" FontWeight="Bold" FontStyle="Italic">
-                    <TextBlock.Effect>
-                        <DropShadowEffect/>
-                    </TextBlock.Effect>
+                <TextBlock Name="TabDescHotels" Text="Book the perfect hotel for your stay." HorizontalAlignment="Left" Height="40" Margin="405,93,0,0" VerticalAlignment="Top" Width="310" FontSize="20" Foreground="White" FontWeight="Bold" FontFamily="Calibri">
                 </TextBlock>
                 <Label x:Name="Hotel" Content="Where would you like to stay?" HorizontalAlignment="Left" Height="40" Margin="113,131,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
                     <Label.Effect>
@@ -211,7 +206,6 @@
                 </Label>
                 <ListBox x:Name="HotelListBoxToDate" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,307,0,0" Background="White"/>
                 <DatePicker x:Name="ToDatePicker" HorizontalAlignment="Left" Margin="335,308,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
-                <ListBox x:Name="HotelListBoxDisplay" Height="221" Width="522"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="524,152,0,0" Foreground="#FF5AFFE7" DisplayMemberPath="HotelDisplay" SelectionChanged="HotelListBoxDisplay_SelectionChanged"/>
                 <materialDesign:PackIcon Kind="PersonAdd" Margin="15,387,0,0" Width="50" Height="50" Foreground="White">
                     <materialDesign:PackIcon.Effect>
                         <DropShadowEffect/>
@@ -254,12 +248,9 @@
                     <ComboBoxItem Content="8"/>
                 </ComboBox>
                 <Button Name="SearchHotelAv" Content="Search For Hotels" HorizontalAlignment="Left" Margin="409,396,0,0" VerticalAlignment="Top" Width="150" Height="40" Click="SearchHotelAv_Click"/>
-
-
-
-
             </Grid>
         </TabItem>
+        <!--End of Hotels TabItem-->
 
         <TabItem Name="CarHire" BorderThickness="20,20,200,20">
             <TabItem.Background>
@@ -283,6 +274,10 @@
                 </StackPanel>
             </TabItem.Header>
             <Grid Margin="0">
+                <Grid Margin="0">
+                    <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
+                    <Image Name="CarBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="C:\Users\liamn\OneDrive - Atlantic TU\Year 2\ObjectOrientedDev\Project\images\carHire_cropped.png"/>
+                </Grid>
                 <Image x:Name="Logo" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
                     <Image.Effect>
                         <DropShadowEffect/>
@@ -293,6 +288,74 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
+                <TextBlock Name="TabDescCarHire" Text="Need to hire a car for your trip?" HorizontalAlignment="Left" Height="40" Margin="405,93,0,0" VerticalAlignment="Top" Width="310" FontSize="20" Foreground="White" FontWeight="Bold" FontFamily="Calibri">
+                </TextBlock>
+                <Label x:Name="CarHirePickUp" Content="Where would you like to pick up your car?" HorizontalAlignment="Left" Height="40" Margin="113,131,0,0" VerticalAlignment="Top" Width="370" FontWeight="Bold" FontSize="16" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <materialDesign:PackIcon Kind="LocationOutline" Margin="67,152,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Button Name="SearchCarHirePickUp" Content="Search Location" HorizontalAlignment="Left" Margin="417,166,0,0" VerticalAlignment="Top" Width="140" Height="30" Click="SearchCarHirePickUp_Click"/>
+                <TextBox x:Name="SearchTextBoxCarHire" HorizontalAlignment="Left" Margin="117,167,0,0" VerticalAlignment="Top" Width="280" Height="30" Text="" Background="White"/>
+                <ListBox x:Name="CarHireListBoxSearch" Height="80" Width="280"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="117,196,0,0" Foreground="#FF5AFFE7" DisplayMemberPath="Name" SelectionChanged="CarHireListBoxSearch_SelectionChanged"/>
+                <materialDesign:PackIcon Kind="Calendar" Margin="15,297,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="PickUpDate" Content="Pick Up Date:" HorizontalAlignment="Left" Height="40" Margin="65,274,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox x:Name="CarHireListBoxPickUpDate" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="69,307,0,0" Background="White"/>
+                <DatePicker x:Name="PickUpDatePicker" HorizontalAlignment="Left" Margin="69,308,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
+                <materialDesign:PackIcon Kind="Calendar" Margin="280,297,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="DropOff" Content="Drop Off Date:" HorizontalAlignment="Left" Height="40" Margin="332,274,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox x:Name="HotelListBoxDropOffDate" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,307,0,0" Background="White"/>
+                <DatePicker x:Name="DropOffDatePicker" HorizontalAlignment="Left" Margin="335,308,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
+                <materialDesign:PackIcon Kind="Clock" Margin="15,387,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="PickUpTime" Content="Pick Up Time:" HorizontalAlignment="Left" Height="40" Margin="65,367,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox x:Name="CarHireListBoxPickUpTime" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="69,397,0,0" Background="White"/>
+                <materialDesign:TimePicker x:Name="PickUpTimePicker" HorizontalAlignment="Left" Margin="69,398,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
+
+                <materialDesign:PackIcon Kind="Clock" Margin="279,384,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="DropOffTime" Content="Drop Off Time:" HorizontalAlignment="Left" Height="40" Margin="333,367,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox x:Name="CarHireListBoxDropOffTime" Height="30" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="337,397,0,0" Background="White"/>
+                <materialDesign:TimePicker x:Name="DropOffTimePicker" HorizontalAlignment="Left" Margin="335,398,0,0" VerticalAlignment="Top" Width="150" Height="30"/>
+                <Button Name="SearchCarHireAv" Content="Search For Cars" HorizontalAlignment="Left" Margin="507,392,0,0" VerticalAlignment="Top" Width="150" Height="40" Click="SearchCarHireAv_Click"/>
+
+
+
 
             </Grid>
         </TabItem>
