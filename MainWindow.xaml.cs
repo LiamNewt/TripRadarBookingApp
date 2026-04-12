@@ -11,7 +11,6 @@ namespace TripRadar
     public partial class MainWindow : Window
     {
         private Hotel _selectedArea;
-        private LocationResult _selectedCarHireArea;
         public MainWindow()
         {
             InitializeComponent();
@@ -160,51 +159,7 @@ namespace TripRadar
         }
 
 
-        private async void SearchCarHirePickUp_Click(object sender, RoutedEventArgs e)
-        {
-            var service = new CarHireAPIService();
-            var cars = await service.CarHireAreaSearch(SearchTextBoxCarHire.Text);
-            CarHireListBoxSearch.ItemsSource = cars;
-        }
 
-        private void CarHireListBoxSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = (LocationResult)CarHireListBoxSearch.SelectedItem;
-            if (selected != null)
-            {
-                _selectedCarHireArea = selected;
-                SearchTextBoxCarHire.Text = selected.Name;
-                CarHireListBoxSearch.Visibility = Visibility.Collapsed;
-            }
 
-        }
-
-        private async void SearchCarHireAv_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var selected = (LocationResult)CarHireListBoxSearch.SelectedItem;
-                var service = new CarHireAPIService();
-
-                var availableList = await service.CarsAvailable(
-                    selected.Latitude,
-                    selected.Longitude,
-                    PickUpDatePicker.SelectedDate.Value,
-                    PickUpTimePicker.SelectedTime.Value,
-                    DropOffDatePicker.SelectedDate.Value,
-                    DropOffTimePicker.SelectedTime.Value
-                    );
-
-                var resultsCars = new CarsAvailList(availableList);
-                resultsCars.Left = this.Left + 580;
-                resultsCars.Top = this.Top + 170;
-                resultsCars.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-
-            }
-        }
     }
 }
