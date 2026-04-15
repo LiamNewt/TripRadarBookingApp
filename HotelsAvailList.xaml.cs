@@ -24,5 +24,34 @@ namespace TripRadar
             InitializeComponent();
             HotelsAvailable.ItemsSource = hotelsAvailable;
         }
+
+        private async void ViewHotel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                var hotel = button.DataContext as Hotel;
+                if (hotel == null)
+                {
+                    return;
+                }
+                
+                var service = new HotelApiService();
+                var details = await service.HotelDetails(
+                    hotel.DestID, 
+                    hotel.checkIn, 
+                    hotel.checkOut, 
+                    hotel.Guests
+                );
+                var HotelDetailsResults = new HotelDetails(details);
+                HotelDetailsResults.Show();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening hotel details: {ex.Message}");
+
+            }
+        }
     }
 }

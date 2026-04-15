@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TripRadar"
         mc:Ignorable="d"
         WindowStartupLocation="Manual"
-        Title="Hotels Available" Height="300" Width="500" Background="#3f8a88">
+        Title="Hotels Available" Height="300" Width="550" Background="#3f8a88">
     <Grid>
         <ScrollViewer>
             <ItemsControl Name="HotelsAvailable">
@@ -28,7 +28,7 @@
                                     <TextBlock Text="{Binding City, StringFormat=' City: {0}'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
                                     <TextBlock Text="{Binding ReviewScore, StringFormat=' Rating: {0}'}" Foreground="Gold" FontSize="18" FontFamily="Calibri"/>
                                     <TextBlock Text="{Binding Price, StringFormat=' €{0}' }" Foreground="#FF5AFFE7" FontSize="30" FontWeight="Bold" FontFamily="Calibri"/>
-                                    <Button Name="ViewHotel" Content="View Details" HorizontalAlignment="Left" Height="40" Margin="0"/>
+                                    <Button Name="ViewHotel" Content="View Details" HorizontalAlignment="Left" Height="40" Margin="0" Click="ViewHotel_Click"/>
                                 </StackPanel>
                             </Grid>
                                 <Border Background="White" CornerRadius="10" Padding="10" Margin="10">

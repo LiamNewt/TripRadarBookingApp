@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Animation;
 
 namespace TripRadar
 {
@@ -53,7 +54,7 @@ namespace TripRadar
             }
         }
 
-        public async Task<List<Hotel>> HotelsAvailable(string hotelid, DateTime checkIn, DateTime checkOut)
+        public async Task<List<Hotel>> HotelsAvailable(string hotelid, DateTime checkIn, DateTime checkOut, int numGuests)
         {
 
             var url =
@@ -61,12 +62,11 @@ namespace TripRadar
                 $"?dest_id={Uri.EscapeDataString(hotelid)}" +
                 $"&search_type=CITY" +
                 $"&arrival_date={checkIn:yyyy-MM-dd}" +
-                $"&departure_date={checkOut:yyyy-MM-dd}";
-                //$"&adults={numAdults}" +
-                //$"&children_age={numChild}" +
-                //$"&room_qty=1" +
-                //$"&page_number=1" +
-                //$"&currency_code=EUR";
+                $"&departure_date={checkOut:yyyy-MM-dd}" +
+                $"&adults={numGuests}" +
+                $"&room_qty=1" +
+                $"&page_number=1" +
+                $"&currency_code=EUR";
 
             var request = new HttpRequestMessage
             {
@@ -99,7 +99,10 @@ namespace TripRadar
                     Description = $"{h.property?.accuratePropertyClass} stars | " +
                                     $"{h.property?.reviewCount} reviews | " +
                                     $"Check In: {h.property?.checkin?.fromTime} " +
-                                    $"Check Out: {h.property?.checkout?.untilTime}"
+                                    $"Check Out: {h.property?.checkout?.untilTime}",
+                    Guests = numGuests,
+                    checkIn = checkIn,
+                    checkOut = checkOut
 
                 }).ToList();
 
@@ -107,5 +110,55 @@ namespace TripRadar
             }
         }
 
+        public async Task<List<Hotel>>HotelDetails(string hotelId, DateTime checkIn, DateTime checkOut, int numGuests)
+        {
+            var url =
+                $"https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails" +
+                $"?hotel_id={Uri.EscapeDataString(hotelId)}" +
+                $"&arrival_date={checkIn:yyyy-MM-dd}" +
+                $"&departure_date={checkOut:yyyy-MM-dd}" +
+                $"&adults={numGuests}" +
+                $"&room_qty=1" +
+                $"&currency_code=EUR";
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(url)
+            };
+
+            request.Headers.Add("x-rapidapi-key", apiKey);
+            request.Headers.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com");
+
+            using (var response = await client.SendAsync(request))
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                //MessageBox.Show($"URL: {url}\n\nRESPONSE: {body.Substring(0, Math.Min(500, body.Length))}");
+                //MessageBox.Show(body.Substring(0, Math.Min(500, body.Length)));
+                var result = JsonConvert.DeserializeObject<HotelDetails.Root>(body);
+                var hotelDetails = new List<Hotel>
+                {
+                    new Hotel
+                    {
+                        HotelDetName = result.data?.hotel_name,
+                        Address = result.data?.address,
+                        HotelCity = result.data?.city,
+                        FromCityCenter = result.data?.distance_to_cc != null && double.TryParse(result.data.distance_to_cc.ToString().Replace(" km", ""), out var distance) ? distance : 0,
+                        RoomType = result.data?.accommodation_type_name,
+                        AvailableRooms = result.data?.available_rooms ?? 0,
+                        Arrival = checkIn,
+                        Departure = checkOut,
+                        Facilities = result.data?.family_facilities?.ToArray().Length > 0 ? string.Join(", ", result.data.family_facilities) : "N/A",
+                        PricePNight = result.data?.product_price_breakdown?.gross_amount_per_night?.amount_rounded.Length ?? 0,
+                        Photos = result.data?.rooms?.Values.FirstOrDefault()?.photos?.Select(p => p.url_max1280)?.ToList() ?? new List<string>(),
+                        ImageUrl = result.data?.rooms?.Values.FirstOrDefault()?.photos?.FirstOrDefault()?.url_original
+                    }
+                };
+                return hotelDetails;
+
+            }
+
+        }
     }
 }
+

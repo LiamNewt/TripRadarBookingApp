@@ -48,10 +48,10 @@ namespace TripRadar
             }
         }
 
-        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, DateTime? returnDate=null)
+        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, DateTime returnDate, int numPassengers)
         {
             var date = departureDate.ToString("yyyy-MM-dd");
-            var rDate = returnDate;
+            var rDate = returnDate.ToString("yyyy-MM-dd");
 
             var url =
                 $"https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights" +
@@ -61,15 +61,12 @@ namespace TripRadar
                 $"&returnDate={rDate}" +
                 $"&stops=none" +
                 $"&pageNo=1" +
-                $"&adults=1" + 
+                $"&adults={numPassengers}" + 
                 $"&sort=BEST" +
                 $"&cabinClass=ECONOMY" +
                 $"&currency_code=EUR";
 
-            if (returnDate.HasValue)
-            {
-                url += $"&returnDate={returnDate.Value.ToString("yyyy-MM-dd")}";
-            }
+            
 
             var request = new HttpRequestMessage
             {

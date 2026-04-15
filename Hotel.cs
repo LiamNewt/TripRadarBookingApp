@@ -21,8 +21,23 @@ namespace TripRadar
         public string Price { get; set; }
         public string ReviewScore { get; set; }
 
-        public int Adults { get; set; }
-        public int Children { get; set; }
+        public int Guests { get; set; }
+
+        //Hotel Details
+        public string HotelDetName { get; set; }
+        public string HotelCity { get; set; }
+        public string Address { get; set; }
+        public double FromCityCenter { get; set; }
+        public DateTime Arrival { get; set; }
+        public DateTime Departure { get; set; }
+        public string RoomType { get; set; }
+        public int AvailableRooms { get; set; }
+        public string Facilities { get; set; }
+        public List<string> Photos { get; set; }
+        public double PricePNight { get; set; }
+
+
+
 
     }
 }

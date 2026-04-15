@@ -44,6 +44,8 @@ namespace TripRadar
             {
                 var fromAirport = (Airport)FlightsListBoxDepart.SelectedItem;
                 var toAirport = (Airport)FlightsListBoxArrival.SelectedItem;
+                var numPassengers = int.Parse(((ComboBoxItem)Passengers.SelectedItem).Content.ToString());
+
 
                 if (fromAirport == null || toAirport == null)
                 {
@@ -75,7 +77,9 @@ namespace TripRadar
                 var flights = await service.SearchFlights(
                     fromAirport.ID,
                     toAirport.ID,
-                    departureDate.Value);
+                    departureDate.Value,
+                    returnDate.Value,
+                    numPassengers);
 
                 var resultsFlight = new FlightResultsWindow(flights);
                 resultsFlight.Show();
@@ -108,6 +112,8 @@ namespace TripRadar
 
         }
 
+        //Hotel Button Click Events
+
         private async void SearchHotelDest_Click(object sender, RoutedEventArgs e)
         {
             var service = new HotelApiService();
@@ -132,22 +138,21 @@ namespace TripRadar
         {
             try
             {
-                //var hotelDest = (Hotel)HotelListBoxSearch.SelectedItem;
                 var checkInDate = FromDatePicker.SelectedDate;
                 var checkOutDate = ToDatePicker.SelectedDate;
-                //var adultNum=(Hotel)Adults.SelectedItem;
-                //var childNum=(Hotel)Children.SelectedItem;
+                var guestsNum= int.Parse(((ComboBoxItem)Guests.SelectedItem).Content.ToString());
 
                 var service = new HotelApiService();
 
                 var hotelsList = await service.HotelsAvailable(
                     _selectedArea.DestID,
                     checkInDate.Value,
-                    checkOutDate.Value
+                    checkOutDate.Value,
+                    guestsNum
                     );
 
                 var resultsHotels = new HotelsAvailList(hotelsList);
-                resultsHotels.Left = this.Left + 580;
+                resultsHotels.Left = this.Left + 510;
                 resultsHotels.Top = this.Top + 170;
                 resultsHotels.Show();
             }

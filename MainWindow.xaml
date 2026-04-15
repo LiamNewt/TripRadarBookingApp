@@ -123,9 +123,29 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
+                <materialDesign:PackIcon Kind="PersonAdd" Margin="818,291,0,0" Width="50" Height="50" Foreground="White">
+                    <materialDesign:PackIcon.Effect>
+                        <DropShadowEffect/>
+                    </materialDesign:PackIcon.Effect>
+                </materialDesign:PackIcon>
+                <Label x:Name="PassengersInc" Content="Passengers:" HorizontalAlignment="Left" Height="40" Margin="874,274,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ComboBox Name="Passengers" Height="30" Margin="880,308,120,0" VerticalAlignment="Top" Background="White">
+                    <ComboBoxItem Content="1" IsEnabled="True"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="8"/>
+                </ComboBox>
                 <RadioButton Name="Single" Width="100" Height="100" IsChecked="True" Content="Single" FontWeight="Bold" FontSize="14" Foreground="white" Background="#FF5AFFE7" Margin="819,153,181,233"/>
                 <RadioButton Name="Return" Width="120" Height="100" Content="Return" Foreground="white" FontWeight="Bold" FontSize="14" Background="#FF5AFFE7" Margin="924,153,56,233"/>
-                <Button Name ="CheckFlights" Content="Search Flights" Width="150" Height="40" Margin="700,380,0,0" Click="CheckFlights_Click"/>
+                <Button x:Name ="CheckFlights" Content="Search Flights" Width="150" Height="40" Margin="0,405,189,0" Click="CheckFlights_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
             </Grid>
         </TabItem>
         <!--End of Flights TabItem-->
@@ -211,12 +231,12 @@
                         <DropShadowEffect/>
                     </materialDesign:PackIcon.Effect>
                 </materialDesign:PackIcon>
-                <Label x:Name="AdultsInc" Content="Adults:" HorizontalAlignment="Left" Height="40" Margin="65,367,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
+                <Label x:Name="GuestsInc" Content="Guests:" HorizontalAlignment="Left" Height="40" Margin="65,367,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
                     <Label.Effect>
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <ComboBox Name="Adults" Height="30" Margin="70,401,930,0" VerticalAlignment="Top" Background="White">
+                <ComboBox Name="Guests" Height="30" Margin="70,401,930,0" VerticalAlignment="Top" Background="White">
                     <ComboBoxItem Content="1" IsEnabled="True"/>
                     <ComboBoxItem Content="2"/>
                     <ComboBoxItem Content="3"/>
@@ -227,33 +247,13 @@
                     <ComboBoxItem Content="8"/>
                 </ComboBox>
 
-                <materialDesign:PackIcon Kind="HumanChild" Margin="225,384,0,0" Width="50" Height="50" Foreground="White">
-                    <materialDesign:PackIcon.Effect>
-                        <DropShadowEffect/>
-                    </materialDesign:PackIcon.Effect>
-                </materialDesign:PackIcon>
-                <Label x:Name="ChildInc" Content="Child:" HorizontalAlignment="Left" Height="40" Margin="269,367,0,0" VerticalAlignment="Top" Width="250" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
-                    <Label.Effect>
-                        <DropShadowEffect/>
-                    </Label.Effect>
-                </Label>
-                <ComboBox Name="Children" Height="30" Margin="274,401,726,0" VerticalAlignment="Top" Background="White">
-                    <ComboBoxItem Content="1" IsEnabled="True"/>
-                    <ComboBoxItem Content="2"/>
-                    <ComboBoxItem Content="3"/>
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="5"/>
-                    <ComboBoxItem Content="6"/>
-                    <ComboBoxItem Content="7"/>
-                    <ComboBoxItem Content="8"/>
-                </ComboBox>
-                <Button Name="SearchHotelAv" Content="Search For Hotels" HorizontalAlignment="Left" Margin="409,396,0,0" VerticalAlignment="Top" Width="150" Height="40" Click="SearchHotelAv_Click"/>
+                <Button Name="SearchHotelAv" Content="Search For Hotels" HorizontalAlignment="Left" Margin="319,396,0,0" VerticalAlignment="Top" Width="150" Height="40" Click="SearchHotelAv_Click"/>
             </Grid>
         </TabItem>
         <!--End of Hotels TabItem-->
 
         <TabItem Name="Account">
-            <TabItem.Background> 
+            <TabItem.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FF5AFFE7" Offset="1"/>
@@ -262,28 +262,31 @@
             <TabItem.Header>
                 <StackPanel Orientation="Horizontal" Height="60">
                     <materialDesign:PackIcon Kind="Account"
-            Width="40"
-            Height="28"
-            VerticalAlignment="Top"
-            Foreground="#FF5AFFE7"/>
+                        Width="40"
+                        Height="28"
+                        VerticalAlignment="Top"
+                        Foreground="#FF5AFFE7"/>
                     <TextBlock Text="My Account"
-            VerticalAlignment="Top"
-            FontSize="21"
-            FontFamily="Calibri"
-            Foreground="White" FontWeight="Bold"/>
+                        VerticalAlignment="Top"
+                        FontSize="21"
+                        FontFamily="Calibri"
+                        Foreground="White" FontWeight="Bold"/>
                 </StackPanel>
             </TabItem.Header>
             <Grid Margin="0">
-                <Image x:Name="Logo4" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
-                    <Image.Effect>
-                        <DropShadowEffect/>
-                    </Image.Effect>
-                </Image>
-                <Label x:Name="Name4" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7" Grid.ColumnSpan="2" Grid.Row="2">
-                    <Label.Effect>
-                        <DropShadowEffect/>
-                    </Label.Effect>
-                </Label>
+                <Grid Margin="0">
+                    <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
+                    <Image x:Name="Logo4" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
+                        <Image.Effect>
+                            <DropShadowEffect/>
+                        </Image.Effect>
+                    </Image>
+                    <Label x:Name="Name4" Content="TripRadar" HorizontalAlignment="Left" Height="64" Margin="100,10,0,0" VerticalAlignment="Top" Width="185" FontWeight="Bold" FontSize="36" Foreground="#FF5AFFE7" Grid.ColumnSpan="2" Grid.Row="2">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                </Grid>
             </Grid>
 
 

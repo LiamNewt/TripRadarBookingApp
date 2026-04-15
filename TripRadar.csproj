@@ -77,6 +77,10 @@
     </Compile>
     <Compile Include="Hotel.cs" />
     <Compile Include="HotelApiService.cs" />
+    <Compile Include="HotelDetails.cs" />
+    <Compile Include="HotelDetails.xaml.cs">
+      <DependentUpon>HotelDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HotelsAvailable.cs" />
     <Compile Include="HotelsAvailList.xaml.cs">
       <DependentUpon>HotelsAvailList.xaml</DependentUpon>
@@ -88,6 +92,10 @@
     </Compile>
     <Compile Include="TripRadarApp.cs" />
     <Page Include="FlightResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HotelDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
