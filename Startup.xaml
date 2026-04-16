@@ -12,14 +12,14 @@
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF3B2F70"/>
             <GradientStop Color="#212B38" Offset="1"/>
-            <GradientStop Color="#FF08C6AB" Offset="0.502"/>
-            <GradientStop Color="#FF5AFFE7" Offset="0.237"/>
-            <GradientStop Color="#FF37465B" Offset="0.787"/>
-            <GradientStop Color="#FF212B38" Offset="1"/>
+            <GradientStop Color="#FF08C6AB" Offset="0.41"/>
+            <GradientStop Color="#FF5AFFE7" Offset="0.171"/>
+            <GradientStop Color="#FF37465B" Offset="0.703"/>
+            <GradientStop Color="#FF212B38" Offset="0.87"/>
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Image Source="C:\Users\liamn\OneDrive - Atlantic TU\Year 2\ObjectOrientedDev\Project\images\ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Height="200" Width="200" Margin="450,123,450,211">
+        <Image Source="/Images/planeIconuse.png" Height="200" Width="200" Margin="450,123,450,211">
             <Image.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0"/>
             </Image.Effect>

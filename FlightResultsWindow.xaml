@@ -22,7 +22,7 @@
                                     <TextBlock Text="{Binding DepartureTime, StringFormat='Departure Date/Time: {0}'}" Foreground="#FF5AFFE7" FontSize="16"/>
                                     <TextBlock Text="{Binding ArrivalTime, StringFormat='Arrival Date/Time: {0}'}" Foreground="#FF5AFFE7" FontSize="16"/>
                                     <TextBlock Text="{Binding Price, StringFormat='€{0}'}" Foreground="#FF5AFFE7" FontSize="24" FontWeight="Bold"/>
-                                    <Button Name="AddFlight" Content="Select Flight" Width="120" Margin="0,0,15,0"/>
+                                    <Button Name="AddFlight" Content="Select Flight" Width="120" Margin="0,0,15,0" Click="AddFlight_Click"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>

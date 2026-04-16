@@ -8,7 +8,6 @@ namespace TripRadar
 {
         public class Flight
         {
-
             public string DepartureAirport { get; set; }
             public string ArrivalAirport { get; set; }
             public DateTime DepartureTime { get; set; }
@@ -17,6 +16,8 @@ namespace TripRadar
             public int Price { get; set; }
             public string AirlineCode { get; set; }
             public string AirlineLogo => $"https://pics.avs.io/200/200/{AirlineCode}.png";
+            public string Token { get; set; }
+            public string DepartureCity { get; set; }
 
     }
 }

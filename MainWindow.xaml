@@ -48,9 +48,9 @@
             <Grid Margin="0">
                 <Grid Margin="0">
                     <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
-                    <Image Name="FlightBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="C:\Users\liamn\OneDrive - Atlantic TU\Year 2\ObjectOrientedDev\Project\images\ChatGPT Image Mar 24, 2026, 02_40_39 PM.png"/>
+                    <Image Name="FlightBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="/Images/flightBGuse.png"/>
                 </Grid>
-                <Image x:Name="Logo2" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
+                <Image x:Name="Logo2" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/Images/planeIconuse.png">
                     <Image.Effect>
                         <DropShadowEffect/>
                     </Image.Effect>
@@ -173,10 +173,10 @@
             <Grid Margin="0">
                 <Grid Margin="0">
                     <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
-                    <Image Name="HotelBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="C:\Users\liamn\OneDrive - Atlantic TU\Year 2\ObjectOrientedDev\Project\images\ChatGPT Image Mar 24, 2026, 01_50_46 PM.png"/>
+                    <Image Name="HotelBG" Margin="10,93,10,4" Opacity="0.08" Stretch="UniformToFill" Source="/Images/hotelsBGuse.png"/>
 
                 </Grid>
-                <Image x:Name="Logo1" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png">
+                <Image x:Name="Logo1" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="93" Source="/Images/planeIconuse.png">
                     <Image.Effect>
                         <DropShadowEffect/>
                     </Image.Effect>
@@ -186,7 +186,7 @@
                         <DropShadowEffect/>
                     </Label.Effect>
                 </Label>
-                <TextBlock Name="TabDescHotels" Text="Book the perfect hotel for your stay." HorizontalAlignment="Left" Height="40" Margin="405,93,0,0" VerticalAlignment="Top" Width="310" FontSize="20" Foreground="White" FontWeight="Bold" FontFamily="Calibri">
+                <TextBlock Name="TabDescHotels" Text="Plan the perfect hotel for your stay." HorizontalAlignment="Left" Height="40" Margin="405,93,0,0" VerticalAlignment="Top" Width="310" FontSize="20" Foreground="White" FontWeight="Bold" FontFamily="Calibri">
                 </TextBlock>
                 <Label x:Name="Hotel" Content="Where would you like to stay?" HorizontalAlignment="Left" Height="40" Margin="113,131,0,0" VerticalAlignment="Top" Width="280" FontWeight="Bold" FontSize="18" Foreground="#FF5AFFE7">
                     <Label.Effect>
@@ -276,7 +276,7 @@
             <Grid Margin="0">
                 <Grid Margin="0">
                     <Rectangle Fill="#FF2C3848" Margin="10,90,10,10" RadiusX="20" RadiusY="20" Grid.Row="1"/>
-                    <Image x:Name="Logo4" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" Grid.Row="2">
+                    <Image x:Name="Logo4" HorizontalAlignment="Left" Height="84" Margin="10,0,0,0" VerticalAlignment="Top" Width="93" Source="/Images/planeIconuse.png" Grid.Row="2">
                         <Image.Effect>
                             <DropShadowEffect/>
                         </Image.Effect>
@@ -288,8 +288,7 @@
                     </Label>
                 </Grid>
             </Grid>
-
-
         </TabItem>
+        <!--End of Account TabItem-->
     </TabControl>
 </Window>

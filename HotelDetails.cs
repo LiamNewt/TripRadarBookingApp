@@ -739,6 +739,8 @@ namespace TripRadar
             public double rating { get; set; }
         }
 
+        
+
 
     }
 }

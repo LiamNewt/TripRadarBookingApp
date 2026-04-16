@@ -22,10 +22,6 @@ namespace TripRadar
         public HotelDetails(List<Hotel>hotelDetails)
         {
             InitializeComponent();
-            foreach (var hotel in hotelDetails)
-            {
-                MessageBox.Show($"Photo count: {hotel.Photos?.Count}\nFirst photo: {hotel.Photos?.FirstOrDefault()}");
-            }
             HotelDetailsPage.ItemsSource = hotelDetails;
         }
     }

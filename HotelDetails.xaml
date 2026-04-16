@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripRadar"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Title="Hotel Details" Height="700" Width="1000" Background="#3f8a88">
     <Grid>
         <ScrollViewer>
@@ -18,23 +19,45 @@
                                         <ColumnDefinition Width="300"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0" CornerRadius="10" ClipToBounds="True" Height="300">
-                                        <Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/>
+                                    <Border Grid.Column="0" CornerRadius="10" ClipToBounds="True" Height="340">
+                                        <Image Source="{Binding ImageUrl}" Stretch="UniformToFill" />
                                     </Border>
-                                    <StackPanel Grid.Column="1" Margin="5">
-                                        <TextBlock Text="{Binding HotelDetName, StringFormat=' {0}'}" FontSize="30" Foreground="#FF5AFFE7" FontWeight="Bold" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding Address, StringFormat=' Address: {0}'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding HotelCity, StringFormat=' City: {0}'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding FromCityCenter, StringFormat=' Distance From City Center: {0}KM'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding RoomType, StringFormat=' Accomodation Type: {0}'}" Foreground="Gold" FontSize="18" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding AvailableRooms, StringFormat=' Available Rooms: {0}' }" Foreground="#FF5AFFE7" FontSize="20" FontWeight="Bold" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding Arrival, StringFormat=' Check In Date/Time: {0}'}" FontSize="18" Foreground="White" FontFamily="Calibri" FontStyle="Italic"/>
-                                        <TextBlock Text="{Binding Departure, StringFormat=' Check Out Date/Time: {0}'}" FontSize="18" Foreground="White" FontFamily="Calibri" FontStyle="Italic"/>
-                                        <TextBlock Text="{Binding Facilities, StringFormat=' Family Facilities Include: {0}'}" FontSize="18" Foreground="Gold" FontFamily="Calibri"/>
-                                        <TextBlock Text="{Binding PricePNight, StringFormat=' Price Per Night: €{0}'}" FontSize="34" Foreground="#FF5AFFE7" FontFamily="Calibri" FontWeight="Bold"/>
-                                        <Button Name="AddHotel" Content="Add To My Trip" HorizontalAlignment="Left" Height="40" Margin="5"/>
-                                    </StackPanel>
-                                </Grid>
+                                        <StackPanel Grid.Column="1" Margin="5">
+                                        <Border Background="#1A2A3A" Grid.Column="1" CornerRadius="10" Padding="10" Margin="5">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding HotelDetName}" FontSize="36" Foreground="White" FontWeight="Bold" FontFamily="Calibri"/>
+                                                <TextBlock Text="{Binding RoomType, StringFormat='Accomodation Type: {0}'}" Foreground="White" FontSize="18" FontFamily="Calibri" AllowDrop="True"/>
+                                                <TextBlock Text="{Binding AvailableRooms, StringFormat='Available Rooms: {0}' }" Foreground="Gold" FontSize="20" FontWeight="Bold" FontFamily="Calibri"/>
+                                                <TextBlock Text="{Binding Arrival, StringFormat='Check In Time: {0}'}" FontSize="18" Foreground="White" FontFamily="Calibri" FontStyle="Italic"/>
+                                                <TextBlock Text="{Binding Departure, StringFormat='Check Out Time: {0}'}" FontSize="18" Foreground="White" FontFamily="Calibri" FontStyle="Italic"/>
+                                                <TextBlock Text="{Binding PricePNight, StringFormat='Price Per Night: €{0}'}" FontSize="30" Foreground="#FF5AFFE7" FontFamily="Calibri" FontWeight="Bold"/>
+                                                <Button Name="AddHotel" Content="Add To My Trip" HorizontalAlignment="Left" Height="40" Margin="5"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="350"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Background="#1A2A3A" CornerRadius="10" Padding="10" Margin="5">
+                                                <StackPanel>
+                                                    <TextBlock Text="LOCATION" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold" Margin="0,0,0,6"/>
+                                                    <TextBlock Text="{Binding Address, StringFormat='Address: {0}'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
+                                                    <TextBlock Text="{Binding HotelCity, StringFormat='City: {0}'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
+                                                    <TextBlock Text="{Binding FromCityCenter, StringFormat='Distance From City Center: {0}KM'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Grid.Column="1" Background="#1A2A3A" CornerRadius="10" Padding="10" Margin="5">
+                                                <StackPanel>
+                                                    <TextBlock Text="FAMILY FACILITIES" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold" Margin="0,0,0,6"/>
+                                                    <TextBlock Text="{Binding Facilities}" FontSize="18" Foreground="White" FontFamily="Calibri"/>
+                                                </StackPanel>
+                                            </Border>
+                                            </Grid>
+                                            </StackPanel>
+                                            </Grid>
+                                
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="10">
                                     <ItemsControl ItemsSource="{Binding Photos}">
                                         <ItemsControl.ItemsPanel>
@@ -47,10 +70,37 @@
                                                 <Border CornerRadius="10" ClipToBounds="True" Margin="5" Width="200" Height="150">
                                                     <Image Source="{Binding}" Stretch="UniformToFill"/>
                                                 </Border>
+                                                
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                 </ScrollViewer>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="350"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Background="#1A2A3A" CornerRadius="10" Padding="10" Margin="5" VerticalAlignment="Top" MaxHeight="60">
+                                        <StackPanel>
+                                            <TextBlock Text="REVIEWS" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold" Margin="0,0,0,6"/>
+                                            <TextBlock Text="{Binding ReviewCount, StringFormat=' {0} Reviews'}" Foreground="White" FontSize="18" FontFamily="Calibri"/>
+                                        </StackPanel>
+                                    </Border>
+                                   
+                                    <Border Grid.Column="1" Background="#1A2A3A" CornerRadius="10" Padding="10" Margin="5">
+                                        <StackPanel>
+                                            <TextBlock Text="AMENITIES" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold" Margin="0,0,0,6"/>
+                                            <ItemsControl ItemsSource="{Binding Amenities}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding}" FontSize="18" Foreground="White" FontFamily="Calibri"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+                                    
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

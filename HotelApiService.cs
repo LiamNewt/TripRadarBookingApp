@@ -143,15 +143,17 @@ namespace TripRadar
                         HotelDetName = result.data?.hotel_name,
                         Address = result.data?.address,
                         HotelCity = result.data?.city,
-                        FromCityCenter = result.data?.distance_to_cc != null && double.TryParse(result.data.distance_to_cc.ToString().Replace(" km", ""), out var distance) ? distance : 0,
+                        FromCityCenter = result.data?.distance_to_cc != null && double.TryParse(result.data.distance_to_cc.ToString().Replace(" km", ""), out var distance) ? Math.Round(distance, 2) : 0,
                         RoomType = result.data?.accommodation_type_name,
                         AvailableRooms = result.data?.available_rooms ?? 0,
-                        Arrival = checkIn,
-                        Departure = checkOut,
+                        Arrival = result.data?.rawData.checkin.fromTime,
+                        Departure = result.data?.rawData.checkout.untilTime,
                         Facilities = result.data?.family_facilities?.ToArray().Length > 0 ? string.Join(", ", result.data.family_facilities) : "N/A",
-                        PricePNight = result.data?.product_price_breakdown?.gross_amount_per_night?.amount_rounded.Length ?? 0,
+                        PricePNight = result.data?.product_price_breakdown?.gross_amount_per_night?.value != null && double.TryParse(result.data.product_price_breakdown.gross_amount_per_night.value.ToString().Replace("€", ""), out var price) ? Math.Round(price,2): 0,
                         Photos = result.data?.rooms?.Values.FirstOrDefault()?.photos?.Select(p => p.url_max1280)?.ToList() ?? new List<string>(),
-                        ImageUrl = result.data?.rooms?.Values.FirstOrDefault()?.photos?.FirstOrDefault()?.url_original
+                        ImageUrl = result.data?.rooms?.Values.FirstOrDefault()?.photos?.FirstOrDefault()?.url_max750,
+                        ReviewCount = result.data?.rawData?.reviewCount.Equals(null) == false ? (int)result.data.rawData.reviewCount : 0,
+                        Amenities = result.data?.property_highlight_strip.Any() == true ? result.data.property_highlight_strip.Select(a => a.name).ToList() : new List<string>(),
                     }
                 };
                 return hotelDetails;

@@ -31,6 +31,8 @@ namespace TripRadar
             using (var response = await client.SendAsync(request))
             {
                 var body = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"RAW RESPONSE: {body}");
+
 
                 dynamic result = JsonConvert.DeserializeObject(body);
 
@@ -98,12 +100,47 @@ namespace TripRadar
                     ArrivalTime = f.segments.First().arrivalTime,
                     Price = f.priceBreakdown.total.units,
                     AirlineCode = f.segments.First().legs.First().carriersData.First().code,
+                    Token = f.token,
                 }).ToList();
 
                 return flights;
             }
+        }
+        public async Task<List<Flight>> FlightDetails(string token)
+        {
+            var url =
+                $"https://booking-com15.p.rapidapi.com/api/v1/flights/getFlightDetails" +
+                $"?token={Uri.EscapeDataString(token)}" +
+                $"&currency_code=EUR";
 
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(url)
+            };
+
+            request.Headers.Add("x-rapidapi-key", apiKey);
+            request.Headers.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com");
+
+            using (var response = await client.SendAsync(request))
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<FlightDetails.Root>(body);
+                var flightDetails = new List<Flight>
+                {
+                    new Flight
+                    {
+                        DepartureCity = result.data?.segments.All(s => s.departureAirport.cityName == result.data.segments.First().departureAirport.cityName) == true
+                            ? result.data.segments.First().departureAirport.cityName
+                            : result.data.segments.First().departureAirport.code,
+
+                    }                    
+                };
+                return flightDetails;
+
+            }
 
         }
+
     }
 }

@@ -72,6 +72,10 @@
     <Compile Include="Airport.cs" />
     <Compile Include="BookingApiService.cs" />
     <Compile Include="Flight.cs" />
+    <Compile Include="FlightDetails.cs" />
+    <Compile Include="FlightDetails.xaml.cs">
+      <DependentUpon>FlightDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlightResultsWindow.xaml.cs">
       <DependentUpon>FlightResultsWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +95,10 @@
       <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
     <Compile Include="TripRadarApp.cs" />
+    <Page Include="FlightDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FlightResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,11 +177,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Resource Include="plane icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ChatGPT Image Feb 2, 2026, 02_40_34 PM.png" />
+    <Resource Include="Images\carHire.png" />
+    <Resource Include="Images\carHire_cropped.png" />
+    <Resource Include="Images\ChatGPT Image Mar 2, 2026, 07_36_01 PM.png" />
+    <Resource Include="Images\ChatGPT Image Mar 2, 2026, 08_09_12 PM.png" />
+    <Resource Include="Images\ChatGPT Image Mar 24, 2026, 01_42_24 PM.png" />
+    <Resource Include="Images\ChatGPT Image Mar 24, 2026, 02_34_57 PM.png" />
+    <Resource Include="Images\ChatGPT Image Mar 24, 2026, 02_39_00 PM.png" />
+    <Resource Include="Images\flightBGuse.png" />
+    <Resource Include="Images\generatedGlobeHologram.png" />
+    <Resource Include="Images\globe.png" />
+    <Resource Include="Images\globeForApp.png" />
+    <Resource Include="Images\holiday.jpg" />
+    <Resource Include="Images\hotelsBGuse.png" />
+    <Resource Include="Images\plane icon.png" />
+    <Resource Include="Images\planeIconuse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.5.3.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.5.3.0\build\MaterialDesignThemes.targets')" />

@@ -24,5 +24,31 @@ namespace TripRadar
             InitializeComponent();
             FlightsItemControl.ItemsSource = flights;
         }
+
+        private async void AddFlight_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                var flight = button.DataContext as Flight;
+                if (flight == null)
+                {
+                    return;
+                }
+
+                var service = new BookingApiService();
+                var details = await service.FlightDetails(
+                    flight.Token
+
+                );
+                var flightDetailsResults = new FlightDetails(details);
+                flightDetailsResults.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding flight: {ex.Message}");
+
+            }
+        }
     }
 }
