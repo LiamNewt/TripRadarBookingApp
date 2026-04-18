@@ -5,14 +5,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace TripRadar
 {
     public class BookingApiService
     {
-        private readonly string apiKey = Environment.GetEnvironmentVariable("BookingComKey");
+        private readonly string apiKey = Environment.GetEnvironmentVariable("BookingComKey"); // Stored securely in environment variable
         private static readonly HttpClient client = new HttpClient();
-
 
         public async Task<List<Airport>> SearchAirports(string query)
         {
@@ -31,7 +31,7 @@ namespace TripRadar
             using (var response = await client.SendAsync(request))
             {
                 var body = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine($"RAW RESPONSE: {body}");
+                //System.Diagnostics.Debug.WriteLine($"RAW RESPONSE: {body}");
 
 
                 dynamic result = JsonConvert.DeserializeObject(body);
@@ -50,31 +50,36 @@ namespace TripRadar
             }
         }
 
-        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, DateTime returnDate, int numPassengers)
+        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, int numPassengers, DateTime? returnDate)
         {
             var date = departureDate.ToString("yyyy-MM-dd");
-            var rDate = returnDate.ToString("yyyy-MM-dd");
 
             var url =
                 $"https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights" +
                 $"?fromId={Uri.EscapeDataString(fromAirportId)}" +
                 $"&toId={Uri.EscapeDataString(toAirportId)}" +
                 $"&departDate={date}" +
-                $"&returnDate={rDate}" +
                 $"&stops=none" +
                 $"&pageNo=1" +
                 $"&adults={numPassengers}" + 
-                $"&sort=BEST" +
+                $"&sort=CHEAPEST" +
                 $"&cabinClass=ECONOMY" +
                 $"&currency_code=EUR";
 
-            
-
-            var request = new HttpRequestMessage
+            if (returnDate.HasValue)
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(url)
-            };
+                url += $"&returnDate={returnDate.Value.ToString("yyyy-MM-dd")}"; //return flight active
+            }
+            else
+            {
+                // Single flight
+            }
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(url)
+                };
 
             request.Headers.Add("x-rapidapi-key", apiKey);
             request.Headers.Add("x-rapidapi-host", "booking-com15.p.rapidapi.com");
@@ -92,15 +97,32 @@ namespace TripRadar
 
                 var result = JsonConvert.DeserializeObject<SearchFlights.Root>(body);
 
-                var flights = result.data.flightOffers.Select(f => new Flight
+                var flights = result.data.flightOffers.Select(f =>
                 {
-                    DepartureAirport = f.segments.First().departureAirport.code,
-                    ArrivalAirport = f.segments.First().arrivalAirport.code,
-                    DepartureTime = f.segments.First().departureTime,
-                    ArrivalTime = f.segments.First().arrivalTime,
-                    Price = f.priceBreakdown.total.units,
-                    AirlineCode = f.segments.First().legs.First().carriersData.First().code,
-                    Token = f.token,
+                    var outboundSegment = f.segments[0];
+                    var returnSegment = f.segments.Count > 1 ? f.segments.Last() : null;
+                    var carrier = outboundSegment.legs?.FirstOrDefault()?.carriersData?.FirstOrDefault();
+
+                    return new Flight
+                    {
+                        //outbound flight details
+                        DepartureAirport = outboundSegment.departureAirport?.name,
+                        ArrivalAirport = outboundSegment.arrivalAirport?.name,
+                        DepartureTime = outboundSegment.departureTime,
+                        ArrivalTime = outboundSegment.arrivalTime,
+
+                        //return flight details if selected
+                        ReturnDepartureAirport = returnSegment?.departureAirport?.name,
+                        ReturnArrivalAirport = returnSegment?.arrivalAirport?.name,
+                        ReturnDepartureTime = returnSegment?.departureTime,
+                        ReturnArrivalTime = returnSegment?.arrivalTime,
+
+                        //share
+                        SmallAirlineLogo = carrier?.logo,
+                        Price = f.priceBreakdown?.total?.units ?? 0,
+                        AirlineCode = carrier?.code,
+                        Token = f.token
+                    };
                 }).ToList();
 
                 return flights;
@@ -126,16 +148,32 @@ namespace TripRadar
             {
                 var body = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<FlightDetails.Root>(body);
-                var flightDetails = new List<Flight>
+                var flightDetails = new List<Flight>();
                 {
-                    new Flight
+                    flightDetails.Add(new Flight
                     {
-                        DepartureCity = result.data?.segments.All(s => s.departureAirport.cityName == result.data.segments.First().departureAirport.cityName) == true
-                            ? result.data.segments.First().departureAirport.cityName
-                            : result.data.segments.First().departureAirport.code,
-
-                    }                    
+                        DepartureAirport = result.data.segments[0].departureAirport?.name,
+                        ArrivalAirport = result.data.segments[0].arrivalAirport?.name,
+                        DepartureTime = result.data.segments[0].departureTime,
+                        ArrivalTime = result.data.segments[0].arrivalTime,
+                        ReturnDepartureAirport = result.data.segments.Count > 1 ? result.data.segments.Last().departureAirport?.name : null,
+                        ReturnArrivalAirport = result.data.segments.Count > 1 ? result.data.segments.Last().arrivalAirport?.name : null,
+                        ReturnDepartureTime = result.data.segments.Count > 1 ? result.data.segments.Last().departureTime : (DateTime?)null,
+                        ReturnArrivalTime = result.data.segments.Count > 1 ? result.data.segments.Last().arrivalTime : (DateTime?)null,
+                        SmallAirlineLogo = result.data.segments[0].legs?.FirstOrDefault()?.carriersData?.FirstOrDefault()?.logo,
+                        Price = result.data.priceBreakdown?.total?.units ?? 0,
+                        AirlineCode = result.data.segments[0].legs?.FirstOrDefault()?.carriersData?.FirstOrDefault()?.code,
+                        DepartureCity = result.data.segments[0].departureAirport?.cityName,
+                        ArrivalCity = result.data.segments[0].arrivalAirport?.cityName,
+                        LuggageType = result.data.segments[0].travellerCabinLuggage?.FirstOrDefault()?.luggageAllowance?.luggageType,
+                        CabinClass = result.data.segments[0].legs?.FirstOrDefault()?.cabinClass,
+                        FlightNum = result.data.segments[0].legs?.FirstOrDefault()?.flightInfo?.flightNumber.ToString().ToUpper(),
+                        //MaxCarryOn = result.data.segments[0].travellerCabinLuggage?.FirstOrDefault()?.luggageAllowance?.maxPiece.Value,
+                        //MaxCarryOnWeight = result.data.segments[0].travellerCabinLuggage?.FirstOrDefault()?.luggageAllowance?.maxWeightPerPiece.Value,
+                        //WeightUnit = result.data.segments[0].travellerCabinLuggage?.FirstOrDefault()?.luggageAllowance?.massUnit,
+                    });
                 };
+
                 return flightDetails;
 
             }

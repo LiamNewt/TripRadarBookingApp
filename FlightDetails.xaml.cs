@@ -24,5 +24,10 @@ namespace TripRadar
             InitializeComponent();
             FlightDetailsPage.ItemsSource = flightDetails;
         }
+
+        private void AddFlightTrip_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -215,8 +215,8 @@ namespace TripRadar
         {
             public string luggageType { get; set; }
             public string ruleType { get; set; }
-            public int maxPiece { get; set; }
-            public double maxWeightPerPiece { get; set; }
+            public int? maxPiece { get; set; }
+            public double? maxWeightPerPiece { get; set; }
             public string massUnit { get; set; }
             public SizeRestrictions sizeRestrictions { get; set; }
         }

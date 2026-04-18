@@ -64,22 +64,22 @@ namespace TripRadar
                 DateTime? returnDate = null;
                 if (Return.IsChecked == true)
                 {
-                    returnDate = ArrivalDatePicker.SelectedDate;
-                    if (returnDate == null)
+                    if (ArrivalDatePicker.SelectedDate == null)
                     {
                         MessageBox.Show("Please enter a return date");
                         return;
                     }
+                    returnDate = ArrivalDatePicker.SelectedDate;
                 }
-               
+
                 var service = new BookingApiService();
 
                 var flights = await service.SearchFlights(
                     fromAirport.ID,
                     toAirport.ID,
                     departureDate.Value,
-                    returnDate.Value,
-                    numPassengers);
+                    numPassengers,
+                    returnDate);
 
                 var resultsFlight = new FlightResultsWindow(flights);
                 resultsFlight.Show();

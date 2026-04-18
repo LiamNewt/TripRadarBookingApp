@@ -157,9 +157,7 @@ namespace TripRadar
                     }
                 };
                 return hotelDetails;
-
             }
-
         }
     }
 }

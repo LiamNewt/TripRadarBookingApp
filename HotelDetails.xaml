@@ -70,7 +70,6 @@
                                                 <Border CornerRadius="10" ClipToBounds="True" Margin="5" Width="200" Height="150">
                                                     <Image Source="{Binding}" Stretch="UniformToFill"/>
                                                 </Border>
-                                                
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
