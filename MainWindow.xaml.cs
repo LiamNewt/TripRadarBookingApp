@@ -163,8 +163,10 @@ namespace TripRadar
             }
         }
 
-
-
-
+        private void MyTrips_Click(object sender, RoutedEventArgs e)
+        {
+            var myTrips = new MyTrips();
+            myTrips.Show();
+        }
     }
 }

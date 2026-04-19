@@ -286,6 +286,7 @@
                             <DropShadowEffect/>
                         </Label.Effect>
                     </Label>
+                    <Button Name="MyTrips" Content="My Trips" Width="200" Height="60" Click="MyTrips_Click"/>
                 </Grid>
             </Grid>
         </TabItem>

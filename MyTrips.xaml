@@ -1,0 +1,75 @@
+﻿<Window x:Class="TripRadar.MyTrips"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TripRadar"
+        mc:Ignorable="d"
+        Title="MyTrips" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="#3f8a88">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+    <Grid>
+        <ScrollViewer>
+        <StackPanel>
+                <TextBlock Text="Saved Flights" Foreground="White" FontSize="30" FontFamily="Calibri" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center"/>
+                <ItemsControl Name="SavedFlightTrips">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                       <StackPanel>
+                           <Border Background="#1A2A3A" CornerRadius="10" Margin="5" Padding="15">
+                            <StackPanel>
+                                <TextBlock Text="OUTBOUND" FontSize="12" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold" Margin="0,0,0,6" TextAlignment="Left"/>
+                                <TextBlock Text="{Binding CabinClass}" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DepartureAirport}" FontSize="20" Foreground="White" FontFamily="Calibri" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DepartureTime, StringFormat='Departure Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
+                                <TextBlock Text="{Binding ArrivalAirport}" FontFamily="Calibri" FontSize="20" Foreground="White" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ArrivalTime, StringFormat='Arrival Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
+                                <TextBlock Text="{Binding SavedOn, StringFormat='Saved On: {0}'}" FontSize="16" Foreground="Gold" FontFamily="Calibri" FontWeight="Bold" FontStyle="Italic"/>
+                                <TextBlock Text="{Binding Price, StringFormat='Price: €{0}'}" FontFamily="Calibri" FontSize="26" Foreground="#FF5AFFE7" FontWeight="Bold"/>
+                                <Button Name="DeleteFlight" Content="Delete Flight" Width="150" Height="40" Click="DeleteFlight_Click"/>
+                             </StackPanel>
+                        </Border>
+                           <Border Background="#1A2A3A" CornerRadius="10" Margin="5" Padding="15" Visibility="{Binding IsReturn, Converter={StaticResource BoolToVis}}">
+                            <StackPanel>
+                                <TextBlock Text="RETURN" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold" Margin="0,0,0,6" TextAlignment="Left"/>
+                                <TextBlock Text="{Binding CabinClass}" FontSize="11" Foreground="#888888" FontFamily="Calibri" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ReturnDepartureAirport}" FontSize="20" Foreground="White" FontFamily="Calibri" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ReturnDepartureTime, StringFormat='Departure Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
+                                <TextBlock Text="{Binding ReturnArrivalAirport}" FontFamily="Calibri" FontSize="20" Foreground="White" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ReturnArrivalTime, StringFormat='Arrival Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
+                                <TextBlock Text="{Binding SavedOn, StringFormat='Saved On: {0}'}" FontSize="16" Foreground="Gold" FontFamily="Calibri" FontWeight="Bold" FontStyle="Italic"/>
+                                <TextBlock Text="{Binding Price, StringFormat='Price: €{0}'}" FontFamily="Calibri" FontSize="26" Foreground="#FF5AFFE7" FontWeight="Bold"/>
+                                <Button Name="DeleteFlight2" Content="Delete Flight" Width="150" Height="40" Click="DeleteFlight_Click"/>
+                            </StackPanel>
+                           </Border>
+                         </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Text="Saved Hotels" Foreground="White" FontSize="30" FontFamily="Calibri" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <ItemsControl Name="SavedHotelTrips">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                       <StackPanel>
+                           <Border Background="#1A2A3A" CornerRadius="10" Margin="10,5" Padding="15">
+                            <StackPanel>
+                                <TextBlock Text="{Binding HotelDetName, StringFormat='Hotel: {0}'}" FontSize="20" Foreground="White" FontFamily="Calibri" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding City, StringFormat='City: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="White"/>
+                                <TextBlock Text="{Binding RoomType, StringFormat='Accomodation Type: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="White"/>
+                                <TextBlock Text="{Binding Arrival, StringFormat='Check In Date/Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
+                                <TextBlock Text="{Binding Departure, StringFormat='Chcek Out Date/Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
+                                <TextBlock Text="{Binding SavedOn, StringFormat='Saved On: {0}'}" FontSize="20" Foreground="Gold" FontFamily="Calibri" FontWeight="Bold" FontStyle="Italic"/>
+                                <TextBlock Text="{Binding PricePNight, StringFormat='€ {0}'}" FontFamily="Calibri" FontSize="26" Foreground="#FF5AFFE7" FontWeight="Bold"/>
+                                <Button Name="DeleteHotel" Content="Delete Hotel" Width="150" Height="40" Click="DeleteHotel_Click"/>
+                            </StackPanel>
+                        </Border>
+                      </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataManagement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,41 @@ namespace TripRadar
 
         private void AddFlightTrip_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var button = sender as Button;
+                var flight = button.DataContext as Flight;
+
+                if (flight == null)
+                {
+                    return;
+                }
+
+                using (var db = new TripRadarContext())
+                {
+                    db.SavedFlights.Add(new SavedFlight
+                    {
+                        DepartureAirport = flight.DepartureAirport,
+                        ArrivalAirport = flight.ArrivalAirport,
+                        DepartureTime = flight.DepartureTime,
+                        ArrivalTime = flight.ArrivalTime,
+                        AirlineCode = flight.AirlineCode,
+                        Price = flight.Price,
+                        CabinClass = flight.CabinClass,
+                        SavedOn = DateTime.Now,
+                        ReturnDepartureAirport = flight.ReturnDepartureAirport,
+                        ReturnArrivalAirport = flight.ReturnArrivalAirport,
+                        ReturnDepartureTime = flight.ReturnDepartureTime,
+                        ReturnArrivalTime = flight.ReturnArrivalTime
+                    });
+                    db.SaveChanges();
+                    MessageBox.Show("Saved Flight to My Trips");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
 
         }
     }

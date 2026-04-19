@@ -130,6 +130,7 @@ namespace TripRadar
         }
         public async Task<List<Flight>> FlightDetails(string token)
         {
+
             var url =
                 $"https://booking-com15.p.rapidapi.com/api/v1/flights/getFlightDetails" +
                 $"?token={Uri.EscapeDataString(token)}" +
@@ -146,6 +147,7 @@ namespace TripRadar
 
             using (var response = await client.SendAsync(request))
             {
+
                 var body = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<FlightDetails.Root>(body);
                 var flightDetails = new List<Flight>();

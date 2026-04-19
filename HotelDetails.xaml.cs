@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DataManagement;
 
 namespace TripRadar
 {
@@ -23,6 +24,42 @@ namespace TripRadar
         {
             InitializeComponent();
             HotelDetailsPage.ItemsSource = hotelDetails;
+        }
+
+        private void AddHotel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                var hotel = button.DataContext as Hotel;
+
+                if (hotel == null)
+                {
+                    return;
+                }
+
+                using (var db = new TripRadarContext())
+                {
+                    db.SavedHotels.Add(new SavedHotel
+                    {
+                        HotelDetName = hotel.HotelDetName,
+                        City = hotel.City,
+                        Address = hotel.Address,
+                        PricePNight = hotel.PricePNight,
+                        ImageUrl = hotel.ImageUrl,
+                        Arrival = hotel.Arrival,
+                        Departure = hotel.Departure,
+                        RoomType = hotel.RoomType,
+                        SavedOn = DateTime.Now
+                    });
+                    db.SaveChanges();
+                    MessageBox.Show("Saved Hotel to My Trips");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

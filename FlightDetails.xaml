@@ -72,8 +72,7 @@
                                         </Border>
                                     </StackPanel>
                                 </StackPanel>
-                                <Button Name="AddFlight" Content="Add Flight To My Trip" Width="150" Height="40" Margin="0,10,0,0" Click="AddFlightTrip_Click"/>
-
+                                <Button Name="AddFlight" Content="Add To My Trip" Width="150" Height="40" Margin="0,10,0,0" Click="AddFlightTrip_Click"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

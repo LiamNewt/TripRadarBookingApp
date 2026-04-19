@@ -31,7 +31,7 @@
                                                 <TextBlock Text="{Binding Arrival, StringFormat='Check In Time: {0}'}" FontSize="18" Foreground="White" FontFamily="Calibri" FontStyle="Italic"/>
                                                 <TextBlock Text="{Binding Departure, StringFormat='Check Out Time: {0}'}" FontSize="18" Foreground="White" FontFamily="Calibri" FontStyle="Italic"/>
                                                 <TextBlock Text="{Binding PricePNight, StringFormat='Price Per Night: €{0}'}" FontSize="30" Foreground="#FF5AFFE7" FontFamily="Calibri" FontWeight="Bold"/>
-                                                <Button Name="AddHotel" Content="Add To My Trip" HorizontalAlignment="Left" Height="40" Margin="5"/>
+                                                <Button Name="AddHotel" Content="Add To My Trip" HorizontalAlignment="Left" Height="40" Margin="5" Click="AddHotel_Click"/>
                                             </StackPanel>
                                         </Border>
 
