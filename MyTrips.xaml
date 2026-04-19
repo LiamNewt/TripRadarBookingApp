@@ -60,8 +60,8 @@
                                 <TextBlock Text="{Binding RoomType, StringFormat='Accomodation Type: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="White"/>
                                 <TextBlock Text="{Binding Arrival, StringFormat='Check In Date/Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
                                 <TextBlock Text="{Binding Departure, StringFormat='Chcek Out Date/Time: {0}'}" FontFamily="Calibri" FontSize="16" Foreground="#FF5AFFE7"/>
-                                <TextBlock Text="{Binding SavedOn, StringFormat='Saved On: {0}'}" FontSize="20" Foreground="Gold" FontFamily="Calibri" FontWeight="Bold" FontStyle="Italic"/>
-                                <TextBlock Text="{Binding PricePNight, StringFormat='€ {0}'}" FontFamily="Calibri" FontSize="26" Foreground="#FF5AFFE7" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding SavedOn, StringFormat='Saved On: {0}'}" FontSize="16" Foreground="Gold" FontFamily="Calibri" FontWeight="Bold" FontStyle="Italic"/>
+                                <TextBlock Text="{Binding PricePNight, StringFormat='€{0}'}" FontFamily="Calibri" FontSize="26" Foreground="#FF5AFFE7" FontWeight="Bold"/>
                                 <Button Name="DeleteHotel" Content="Delete Hotel" Width="150" Height="40" Click="DeleteHotel_Click"/>
                             </StackPanel>
                         </Border>

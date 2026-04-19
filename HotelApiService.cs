@@ -11,12 +11,12 @@ using System.Windows.Media.Animation;
 
 namespace TripRadar
 {
-    public class HotelApiService
+    public class HotelApiService //Hotel API Service class
     {
-        private readonly string apiKey = Environment.GetEnvironmentVariable("BookingComKey");
+        private readonly string apiKey = Environment.GetEnvironmentVariable("BookingComKey"); //stored in environment varibales
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<List<Hotel>> HotelAreaSearch(string query)
+        public async Task<List<Hotel>> HotelAreaSearch(string query) //Hotel search API method
         {
             var safe = Uri.EscapeDataString(query);
 
@@ -32,14 +32,20 @@ namespace TripRadar
             using (var response = await client.SendAsync(request))
             {
                 var body = await response.Content.ReadAsStringAsync();
-                MessageBox.Show($"AREA SEARCH: {body.Substring(0, Math.Min(800, body.Length))}");
+
+                //handles API error
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"API Error: {response.StatusCode}{body}");
+                }
+
                 dynamic result = JsonConvert.DeserializeObject(body);
 
                 var hotels = new List<Hotel>();
                 foreach (var hotel in result.data)
                 {
                     string destType = hotel.search_type?.ToString();
-                    if (destType != "city")
+                    if (destType != "city") //limits destination type to city only to avoid errors
                     {
                         continue;
                     }
@@ -54,7 +60,7 @@ namespace TripRadar
             }
         }
 
-        public async Task<List<Hotel>> HotelsAvailable(string hotelid, DateTime checkIn, DateTime checkOut, int numGuests)
+        public async Task<List<Hotel>> HotelsAvailable(string hotelid, DateTime checkIn, DateTime checkOut, int numGuests) //Hotels available API method
         {
 
             var url =
@@ -80,10 +86,15 @@ namespace TripRadar
             using (var response = await client.SendAsync(request))
             {
                 var body = await response.Content.ReadAsStringAsync();
-                //Error Messages
-                MessageBox.Show($"URL: {url}\n\nRESPONSE: {body.Substring(0, Math.Min(500, body.Length))}");
-                MessageBox.Show(body.Substring(0, Math.Min(500, body.Length)));
-                //Error Messages
+                //Error/Debugging Messages
+                //MessageBox.Show($"URL: {url}\n\nRESPONSE: {body.Substring(0, Math.Min(500, body.Length))}");
+                //MessageBox.Show(body.Substring(0, Math.Min(500, body.Length)));
+
+                //handles API error
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"API Error: {response.StatusCode}{body}");
+                }
 
                 var result = JsonConvert.DeserializeObject<HotelsAvailable.Root>(body);
 
@@ -110,7 +121,7 @@ namespace TripRadar
             }
         }
 
-        public async Task<List<Hotel>>HotelDetails(string hotelId, DateTime checkIn, DateTime checkOut, int numGuests)
+        public async Task<List<Hotel>>HotelDetails(string hotelId, DateTime checkIn, DateTime checkOut, int numGuests) //hotel details API method
         {
             var url =
                 $"https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails" +
@@ -133,8 +144,13 @@ namespace TripRadar
             using (var response = await client.SendAsync(request))
             {
                 var body = await response.Content.ReadAsStringAsync();
-                //MessageBox.Show($"URL: {url}\n\nRESPONSE: {body.Substring(0, Math.Min(500, body.Length))}");
-                //MessageBox.Show(body.Substring(0, Math.Min(500, body.Length)));
+
+                //handles API error
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"API Error: {response.StatusCode}{body}");
+                }
+
                 var result = JsonConvert.DeserializeObject<HotelDetails.Root>(body);
                 var hotelDetails = new List<Hotel>
                 {

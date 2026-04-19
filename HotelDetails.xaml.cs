@@ -26,10 +26,11 @@ namespace TripRadar
             HotelDetailsPage.ItemsSource = hotelDetails;
         }
 
-        private void AddHotel_Click(object sender, RoutedEventArgs e)
+        private void AddHotel_Click(object sender, RoutedEventArgs e)//add hotel to trips button handler
         {
             try
             {
+                //button
                 var button = sender as Button;
                 var hotel = button.DataContext as Hotel;
 
@@ -38,7 +39,7 @@ namespace TripRadar
                     return;
                 }
 
-                using (var db = new TripRadarContext())
+                using (var db = new TripRadarContext()) //add to database
                 {
                     db.SavedHotels.Add(new SavedHotel
                     {

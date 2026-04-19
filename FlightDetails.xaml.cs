@@ -26,10 +26,11 @@ namespace TripRadar
             FlightDetailsPage.ItemsSource = flightDetails;
         }
 
-        private void AddFlightTrip_Click(object sender, RoutedEventArgs e)
+        private void AddFlightTrip_Click(object sender, RoutedEventArgs e)//add flight to my trips button handler
         {
             try
             {
+                //button
                 var button = sender as Button;
                 var flight = button.DataContext as Flight;
 
@@ -38,7 +39,7 @@ namespace TripRadar
                     return;
                 }
 
-                using (var db = new TripRadarContext())
+                using (var db = new TripRadarContext()) //add to database
                 {
                     db.SavedFlights.Add(new SavedFlight
                     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TripRadar
 {
-        public class Flight
+        public class Flight //Flight model
         {
         public int ID { get; set; }
         //Search Results Properties
@@ -43,6 +43,6 @@ namespace TripRadar
         [NotMapped]
             public string AirlineLogo => $"https://pics.avs.io/200/200/{AirlineCode}.png";
     }
-}
+}//end of flight class
 
 

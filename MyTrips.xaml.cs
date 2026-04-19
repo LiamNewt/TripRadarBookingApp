@@ -26,7 +26,7 @@ namespace TripRadar
             LoadTrips();
         }
 
-        private void LoadTrips()
+        private void LoadTrips() //Load saved trips
         {
             using(var db = new TripRadarContext())
             {
@@ -35,7 +35,7 @@ namespace TripRadar
             }
         }
 
-        private void DeleteFlight_Click(object sender, RoutedEventArgs e)
+        private void DeleteFlight_Click(object sender, RoutedEventArgs e) //delete a trip for flight
         {
             var button = sender as Button;
             var flight = button.DataContext as SavedFlight;
@@ -49,7 +49,7 @@ namespace TripRadar
             LoadTrips();
         }
 
-        private void DeleteHotel_Click(object sender, RoutedEventArgs e)
+        private void DeleteHotel_Click(object sender, RoutedEventArgs e) //delete a hotel trip
         {
             var button = sender as Button;
             var hotel = button.DataContext as SavedHotel;
@@ -63,4 +63,4 @@ namespace TripRadar
             LoadTrips();
         }
     }
-}
+}//end of my trips

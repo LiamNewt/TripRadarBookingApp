@@ -25,10 +25,11 @@ namespace TripRadar
             FlightsItemControl.ItemsSource = flights;
         }
 
-        private async void AddFlight_Click(object sender, RoutedEventArgs e)
+        private async void AddFlight_Click(object sender, RoutedEventArgs e) //view flight details button handler
         {
             try
             {
+                //button
                 var button = sender as Button;
                 var flight = button.DataContext as Flight;
                 if (flight == null)
@@ -36,6 +37,7 @@ namespace TripRadar
                     return;
                 }
 
+                //service
                 var service = new BookingApiService();
                 var details = await service.FlightDetails(
                     flight.Token

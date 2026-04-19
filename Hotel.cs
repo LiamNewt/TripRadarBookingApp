@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TripRadar
 {
-    public class Hotel
+    public class Hotel //Hotel Model
     {
         //Hotel
         public string DestID {  get; set; }
@@ -43,11 +43,5 @@ namespace TripRadar
         public List<string> Amenities { get; set; }
         [NotMapped]
         public List<string> Photos { get; set; }
-
-
-
-
-
-
     }
-}
+}//end of hotel class

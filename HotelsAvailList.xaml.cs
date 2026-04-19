@@ -25,7 +25,7 @@ namespace TripRadar
             HotelsAvailable.ItemsSource = hotelsAvailable;
         }
 
-        private async void ViewHotel_Click(object sender, RoutedEventArgs e)
+        private async void ViewHotel_Click(object sender, RoutedEventArgs e) //View hotel details card button
         {
             try
             {
@@ -36,6 +36,7 @@ namespace TripRadar
                     return;
                 }
                 
+                //service
                 var service = new HotelApiService();
                 var details = await service.HotelDetails(
                     hotel.DestID, 
@@ -50,7 +51,6 @@ namespace TripRadar
             catch (Exception ex)
             {
                 MessageBox.Show($"Error opening hotel details: {ex.Message}");
-
             }
         }
     }

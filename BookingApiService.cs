@@ -11,10 +11,11 @@ namespace TripRadar
 {
     public class BookingApiService
     {
+        //I have sent you an API key so you can access too.
         private readonly string apiKey = Environment.GetEnvironmentVariable("BookingComKey"); // Stored securely in environment variable
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<List<Airport>> SearchAirports(string query)
+        public async Task<List<Airport>> SearchAirports(string query) //search airport depart/arrival API method
         {
             var safe = Uri.EscapeDataString(query);
 
@@ -33,6 +34,11 @@ namespace TripRadar
                 var body = await response.Content.ReadAsStringAsync();
                 //System.Diagnostics.Debug.WriteLine($"RAW RESPONSE: {body}");
 
+                //handles API error
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"API Error: {response.StatusCode}{body}");
+                }
 
                 dynamic result = JsonConvert.DeserializeObject(body);
 
@@ -48,15 +54,15 @@ namespace TripRadar
                 }
                 return airports;
             }
-        }
+        }//end of airport destination method
 
-        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, int numPassengers, DateTime? returnDate)
+        public async Task<List<Flight>> SearchFlights(string fromAirportId, string toAirportId, DateTime departureDate, int numPassengers, DateTime? returnDate)//search available flights API method
         {
             var date = departureDate.ToString("yyyy-MM-dd");
 
             var url =
                 $"https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights" +
-                $"?fromId={Uri.EscapeDataString(fromAirportId)}" +
+                $"?fromId={Uri.EscapeDataString(fromAirportId)}" + //EscapeDataString to convert string to encoded to pass through url
                 $"&toId={Uri.EscapeDataString(toAirportId)}" +
                 $"&departDate={date}" +
                 $"&stops=none" +
@@ -88,8 +94,10 @@ namespace TripRadar
             {
                 var body = await response.Content.ReadAsStringAsync();
 
-                System.Diagnostics.Debug.WriteLine($"RAW RESPONSE: {body}");
+                //Debugging messages 
+                //System.Diagnostics.Debug.WriteLine($"RAW RESPONSE: {body}");
 
+                //handles API error
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new Exception($"API Error: {response.StatusCode}{body}");
@@ -111,7 +119,7 @@ namespace TripRadar
                         DepartureTime = outboundSegment.departureTime,
                         ArrivalTime = outboundSegment.arrivalTime,
 
-                        //return flight details if selected
+                        //return flight details (if selected)
                         ReturnDepartureAirport = returnSegment?.departureAirport?.name,
                         ReturnArrivalAirport = returnSegment?.arrivalAirport?.name,
                         ReturnDepartureTime = returnSegment?.departureTime,
@@ -127,8 +135,9 @@ namespace TripRadar
 
                 return flights;
             }
-        }
-        public async Task<List<Flight>> FlightDetails(string token)
+        }//end of search flight method
+
+        public async Task<List<Flight>> FlightDetails(string token) //flight details card API Method
         {
 
             var url =
@@ -149,20 +158,32 @@ namespace TripRadar
             {
 
                 var body = await response.Content.ReadAsStringAsync();
+
+                //handles API error
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"API Error: {response.StatusCode}{body}");
+                }
+
                 var result = JsonConvert.DeserializeObject<FlightDetails.Root>(body);
                 var flightDetails = new List<Flight>();
                 {
                     flightDetails.Add(new Flight
                     {
+                        //outbound
                         DepartureAirport = result.data.segments[0].departureAirport?.name,
                         ArrivalAirport = result.data.segments[0].arrivalAirport?.name,
                         DepartureTime = result.data.segments[0].departureTime,
                         ArrivalTime = result.data.segments[0].arrivalTime,
+
+                        //return
                         ReturnDepartureAirport = result.data.segments.Count > 1 ? result.data.segments.Last().departureAirport?.name : null,
                         ReturnArrivalAirport = result.data.segments.Count > 1 ? result.data.segments.Last().arrivalAirport?.name : null,
                         ReturnDepartureTime = result.data.segments.Count > 1 ? result.data.segments.Last().departureTime : (DateTime?)null,
                         ReturnArrivalTime = result.data.segments.Count > 1 ? result.data.segments.Last().arrivalTime : (DateTime?)null,
                         SmallAirlineLogo = result.data.segments[0].legs?.FirstOrDefault()?.carriersData?.FirstOrDefault()?.logo,
+
+                        //share
                         Price = result.data.priceBreakdown?.total?.units ?? 0,
                         AirlineCode = result.data.segments[0].legs?.FirstOrDefault()?.carriersData?.FirstOrDefault()?.code,
                         DepartureCity = result.data.segments[0].departureAirport?.cityName,
@@ -175,12 +196,8 @@ namespace TripRadar
                         //WeightUnit = result.data.segments[0].travellerCabinLuggage?.FirstOrDefault()?.luggageAllowance?.massUnit,
                     });
                 };
-
                 return flightDetails;
-
-            }
-
+            }//end of flight details method
         }
-
     }
-}
+}//end of flight API service
